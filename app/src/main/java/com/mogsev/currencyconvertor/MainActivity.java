@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mogsev.util.Currency;
 import com.mogsev.util.CurrencyURL;
 
 import org.w3c.dom.Document;
@@ -20,7 +21,6 @@ import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Currency;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
 
+    //
     private HashMap<String, String> listCurrency;
+    private Currency currency;
 
     /**
      * Initialize View elements
@@ -80,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
         spinnerFromCurrency.setAdapter(adapterCurrency);
         spinnerToCurrency.setAdapter(adapterCurrency);
 
-        ListCurrency listCurrency = new ListCurrency(); // Create
-        listCurrency.execute(); // Start
+        //ListCurrency listCurrency = new ListCurrency(); // Create
+        //listCurrency.execute(); // Start
+        currency = new Currency();
     }
 
     @Override
@@ -162,20 +165,23 @@ public class MainActivity extends AppCompatActivity {
         int numFromCurrency = spinnerFromCurrency.getSelectedItemPosition();
         int numToCurrency = spinnerToCurrency.getSelectedItemPosition();
         // get string result spinners
-        String str1 = adapterCurrency.getItem(numFromCurrency).toString();
-        String str2 = adapterCurrency.getItem(numToCurrency).toString();
+        String from = adapterCurrency.getItem(numFromCurrency).toString();
+        String to = adapterCurrency.getItem(numToCurrency).toString();
 
-        textViewFromCurrency.setText(str1);
-        textViewToCurrency.setText(str2);
+        textViewFromCurrency.setText(from);
+        textViewToCurrency.setText(to);
+
+        textViewFromCurrencyName.setText(currency.getName(from));
+        textViewToCurrencyName.setText(currency.getName(to));
 
         switch (i) {
             case CurrencyURL.URL_NORMAL:
-                url.append(CurrencyURL.FROM).append(str1);
-                url.append(CurrencyURL.TO).append(str2);
+                url.append(CurrencyURL.FROM).append(from);
+                url.append(CurrencyURL.TO).append(to);
                 break;
             case CurrencyURL.URL_INVERSE:
-                url.append(CurrencyURL.FROM).append(str2);
-                url.append(CurrencyURL.TO).append(str1);
+                url.append(CurrencyURL.FROM).append(to);
+                url.append(CurrencyURL.TO).append(from);
                 break;
         }
 
@@ -269,8 +275,13 @@ public class MainActivity extends AppCompatActivity {
 
                 NodeList nodeList = doc.getElementsByTagName("Currency");
                 for (int i = 0; i < nodeList.getLength(); i++) {
-                    NodeList nodeList1 = nodeList.item(i).getChildNodes();
-                    Log.d("ListCurrency", nodeList1.item(0).getTextContent());
+                    Node node = nodeList.item(i);
+                    NodeList childNodes = node.getChildNodes();
+
+                    Node charCode = childNodes.item(3);
+                    Node name = childNodes.item(7);
+                    Node nameEnglish = childNodes.item(9);
+
                 }
 
             } catch (Exception ex) {
