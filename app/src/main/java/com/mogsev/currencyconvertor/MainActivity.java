@@ -219,10 +219,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void getRate(View view) {
         //************
-        list = currencyTest.getListCurrency();
-        currencyAdapter = new CurrencyAdapter(this, list, getResources());
-        Log.d("Log", list.toString());
-        spinnerFromCurrency.setAdapter(currencyAdapter);
+        //list = currencyTest.getListCurrency();
+        //currencyAdapter = new CurrencyAdapter(this, list, getResources());
+        //Log.d("Log", list.toString());
+        //spinnerFromCurrency.setAdapter(currencyAdapter);
         //**************
         ConversionRate conversionRate = new ConversionRate(); // Create
         conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start

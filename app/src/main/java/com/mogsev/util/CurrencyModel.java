@@ -53,4 +53,9 @@ public class CurrencyModel {
     public void setNameEnglish(String nameEnglish) {
         this.nameEnglish = nameEnglish;
     }
+
+    @Override
+    public String toString() {
+        return "Code: " + code + "\t" + "Name: " + name + "\t" + "Name english: " + nameEnglish;
+    }
 }

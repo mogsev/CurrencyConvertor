@@ -38,6 +38,7 @@ public class Currency {
         hashName = new HashMap<>();
         hashNameEnglish = new HashMap<>();
         listCurrency = new ArrayList<CurrencyModel>();
+        initHash();
     }
 
     /**
@@ -63,6 +64,8 @@ public class Currency {
                         Node nameEnglish = childNodes.item(9);
                         hashName.put(charCode.getTextContent(), name.getTextContent());
                         hashNameEnglish.put(charCode.getTextContent(), nameEnglish.getTextContent());
+                        listCurrency.add(new CurrencyModel(charCode.getTextContent(),
+                                name.getTextContent(), nameEnglish.getTextContent()));
                     }
                 } catch (Exception ex) {
                     Log.d(TAG_NAME, ex.toString());
@@ -102,11 +105,12 @@ public class Currency {
      * @return
      */
     public ArrayList<CurrencyModel> getListCurrency() {
+        /**
         String code = "";
         for (int i = 0; i < listCode.length; i++) {
             code = listCode[i];
             listCurrency.add(new CurrencyModel(code, hashName.get(code), hashNameEnglish.get(code)));
-        }
+        }*/
         return listCurrency;
     }
 }

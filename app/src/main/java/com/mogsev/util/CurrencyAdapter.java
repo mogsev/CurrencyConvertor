@@ -41,7 +41,7 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(tempValues.getCode());
         textView.append(" - ");
-        textView.append(String.valueOf(tempValues.getName()));
+        textView.append(tempValues.getName());
 
         return row;
     }
