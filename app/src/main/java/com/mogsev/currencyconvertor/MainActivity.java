@@ -12,7 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mogsev.util.Currency;
+import com.mogsev.util.CurrencyAdapter;
 import com.mogsev.util.CurrencyURL;
+import com.mogsev.util.CurrencyModel;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,6 +23,7 @@ import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -49,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
     //
     private HashMap<String, String> listCurrency;
     private Currency currency;
+
+    //**************************************************
+    private Currency currencyTest;
+    private String[] listCode;
+    private ArrayList<CurrencyModel> list;
+    private CurrencyAdapter currencyAdapter;
+    //**************************************************
 
     /**
      * Initialize View elements
@@ -85,6 +95,20 @@ public class MainActivity extends AppCompatActivity {
         //ListCurrency listCurrency = new ListCurrency(); // Create
         //listCurrency.execute(); // Start
         currency = new Currency();
+
+
+        //************************************************************
+        listCode = getResources().getStringArray(R.array.currency);
+        currencyTest = new Currency();
+        currencyTest.setListCode(listCode);
+        //ArrayList<CurrencyModel> list = new ArrayList<CurrencyModel>();
+        //list.add(new CurrencyModel("UAH", "Ukraine"));
+        //list.add(new CurrencyModel("RUB", "RUSSIA"));
+        list = currencyTest.getListCurrency();
+        currencyAdapter = new CurrencyAdapter(this, list, getResources());
+        spinnerFromCurrency.setAdapter(currencyAdapter);
+
+        //************************************************************
     }
 
     @Override
@@ -194,6 +218,12 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void getRate(View view) {
+        //************
+        list = currencyTest.getListCurrency();
+        currencyAdapter = new CurrencyAdapter(this, list, getResources());
+        Log.d("Log", list.toString());
+        spinnerFromCurrency.setAdapter(currencyAdapter);
+        //**************
         ConversionRate conversionRate = new ConversionRate(); // Create
         conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
         ConversionRateInverse conversionRateInverse = new ConversionRateInverse(); // Create

@@ -39,7 +39,7 @@
 
     <TextView
         android:id="@+id/value"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
@@ -51,12 +51,15 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="4dp"
-        style="@style/CardView">
+        card_view:cardCornerRadius="2dp"
+        style="@style/CardView"
+        android:translationZ="@dimen/cardview_default_elevation"
+        android:elevation="2dp">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <TableRow
             android:layout_width="wrap_content"
@@ -70,8 +73,8 @@
                 android:id="@+id/textView"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:paddingRight="5dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:paddingRight="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,8 +82,8 @@
                 android:text="@string/currency_name"
                 android:id="@+id/textView2"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:paddingLeft="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/textViewFromCurrency"
-                android:paddingRight="5dp"
+                android:paddingRight="4dp"
                 android:layout_weight="1"
                 android:gravity="right" />
 
@@ -112,7 +115,7 @@
                 android:id="@+id/textViewFromCurrencyName"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:paddingLeft="5dp" />
+                android:paddingLeft="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,7 +123,8 @@
                 android:text="New Text"
                 android:id="@+id/textViewFromRate"
                 android:layout_weight="1"
-                android:gravity="right" />
+                android:gravity="right"
+                android:paddingRight="4dp" />
         </TableRow>
 
         <TableRow
@@ -132,18 +136,18 @@
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/textViewToCurrency"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:gravity="right" />
+                android:gravity="right"
+                android:paddingRight="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/textViewToCurrencyName"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:gravity="left" />
+                android:gravity="left"
+                android:paddingLeft="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,7 +155,8 @@
                 android:text="New Text"
                 android:id="@+id/textViewToRate"
                 android:layout_weight="1"
-                android:gravity="right" />
+                android:gravity="right"
+                android:paddingRight="4dp" />
         </TableRow>
     </TableLayout>
     </android.support.v7.widget.CardView>

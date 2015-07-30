@@ -1,6 +1,9 @@
 package com.mogsev.util;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.mogsev.currencyconvertor.R;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -8,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Handler;
 
@@ -23,6 +27,9 @@ public class Currency {
 
     private HashMap<String, String> hashName;
     private HashMap<String, String> hashNameEnglish;
+    private String[] listCode;
+    private ArrayList<CurrencyModel> listCurrency;
+    private Context context;
 
     /**
      * Main constructor
@@ -30,7 +37,7 @@ public class Currency {
     public Currency() {
         hashName = new HashMap<>();
         hashNameEnglish = new HashMap<>();
-        initHash();
+        listCurrency = new ArrayList<CurrencyModel>();
     }
 
     /**
@@ -80,5 +87,26 @@ public class Currency {
      */
     public String getNameEnglish(String charCode) {
         return hashNameEnglish.get(charCode);
+    }
+
+    /**
+     *
+     * @param listCode
+     */
+    public void setListCode(String[] listCode) {
+        this.listCode = listCode;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<CurrencyModel> getListCurrency() {
+        String code = "";
+        for (int i = 0; i < listCode.length; i++) {
+            code = listCode[i];
+            listCurrency.add(new CurrencyModel(code, hashName.get(code), hashNameEnglish.get(code)));
+        }
+        return listCurrency;
     }
 }
