@@ -1,172 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <LinearLayout
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+
+    <com.mogsev.currencyconvertor.SlidingTabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:elevation="2dp"
+        android:background="@color/ColorPrimary"/>
 
-        <Spinner
-            android:id="@+id/from_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="left" />
-
-        <Button
-            android:id="@+id/btn_refresh"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/btn_refresh"
-            android:onClick="getRate"/>
-
-        <Spinner
-            android:id="@+id/to_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="right" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textSize="22sp" />
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="2dp"
-        style="@style/CardView"
-        android:translationZ="@dimen/cardview_default_elevation"
-        android:elevation="2dp">
-
-    <TableLayout
-        android:layout_width="match_parent"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/currency"
-                android:id="@+id/textView"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:textSize="16sp"
-                android:paddingRight="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/currency_name"
-                android:id="@+id/textView2"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:paddingLeft="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rate"
-                android:id="@+id/textView3"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:textSize="16sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewFromCurrency"
-                android:paddingRight="4dp"
-                android:layout_weight="1"
-                android:gravity="right" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewFromCurrencyName"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewFromRate"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingRight="4dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewToCurrency"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingRight="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewToCurrencyName"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textViewToRate"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingRight="4dp" />
-        </TableRow>
-    </TableLayout>
-    </android.support.v7.widget.CardView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Refresh List"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal"
-        android:onClick="refreshList"/>
 
 </LinearLayout>

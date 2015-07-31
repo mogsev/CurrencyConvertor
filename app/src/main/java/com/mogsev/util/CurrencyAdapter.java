@@ -33,7 +33,7 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(currencyModel.getCode());
         textView.append(" - ");
-        textView.append(currencyModel.getName());
+        textView.append(String.valueOf(currencyModel.getName()));
 
         return row;
     }

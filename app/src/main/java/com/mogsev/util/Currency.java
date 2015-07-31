@@ -1,5 +1,8 @@
 package com.mogsev.util;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 
 import org.w3c.dom.Document;
@@ -11,6 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Handler;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -114,4 +118,10 @@ public class Currency {
             listCurrency.add(new CurrencyModel(code));
         }
     }
+
+    //*************************** Dialog start **************************************
+
+
+
+    //************************** End Dialog *****************************************
 }

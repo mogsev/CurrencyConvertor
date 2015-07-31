@@ -1,5 +1,6 @@
 package com.mogsev.currencyconvertor;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,7 +25,6 @@ import org.w3c.dom.NodeList;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] listCode;
     private ArrayList<CurrencyModel> list;
     private CurrencyAdapter currencyAdapter;
+
+    private ProgressDialog progressDialog;
 
     /**
      * Initialize View elements
@@ -87,34 +90,34 @@ public class MainActivity extends AppCompatActivity {
         spinnerFromCurrency.setAdapter(currencyAdapter);
         spinnerToCurrency.setAdapter(currencyAdapter);
 
+        //***********************************************************
+        spinnerFromCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
+                textViewFromCurrency.setText(currencyModel.getCode());
+                textViewFromCurrencyName.setText(currencyModel.getName());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerToCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
+                textViewToCurrency.setText(currencyModel.getCode());
+                textViewToCurrencyName.setText(currencyModel.getName());
+            }
 
-        /**
-        adapterCurrency = ArrayAdapter.createFromResource(this,
-                R.array.currency, android.R.layout.simple_spinner_item );
-        adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-*/
-        //spinnerFromCurrency.setAdapter(adapterCurrency);
-        //spinnerToCurrency.setAdapter(adapterCurrency);
-
-        //ListCurrency listCurrency = new ListCurrency(); // Create
-        //listCurrency.execute(); // Start
-
-
-
-        //************************************************************
-        /**listCode = getResources().getStringArray(R.array.currency);
-        currencyTest = new Currency();
-        currencyTest.setListCode(listCode);
-        //ArrayList<CurrencyModel> list = new ArrayList<CurrencyModel>();
-        //list.add(new CurrencyModel("UAH", "Ukraine"));
-        //list.add(new CurrencyModel("RUB", "RUSSIA"));
-        list = currencyTest.getListCurrency();
-        currencyAdapter = new CurrencyAdapter(this, list);
-
-        spinnerFromCurrency.setAdapter(currencyAdapter);
-         */
-        //************************************************************
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerFromCurrency.setSelection(61);
+        spinnerToCurrency.setSelection(59);
+        //***********************************************************
     }
 
     @Override
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity_main in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -292,37 +295,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-    private class ListCurrency extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            listCurrency = new HashMap<>();
-            try {
-                URL url = new URL("http://www.nbrb.by/Services/XmlExRatesRef.aspx");
-                URLConnection connection = url.openConnection();
-                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                DocumentBuilder db = dbf.newDocumentBuilder();
-                Document doc = db.parse(connection.getInputStream());
-
-                NodeList nodeList = doc.getElementsByTagName("Currency");
-                for (int i = 0; i < nodeList.getLength(); i++) {
-                    Node node = nodeList.item(i);
-                    NodeList childNodes = node.getChildNodes();
-
-                    Node charCode = childNodes.item(3);
-                    Node name = childNodes.item(7);
-                    Node nameEnglish = childNodes.item(9);
-
-                }
-
-            } catch (Exception ex) {
-                Log.d("ListCurrency", ex.toString());
-            }
-            return null;
-        }
-    }*/
-
     public void refreshList(View view) {
         for (int i = 0; i < currencyAdapter.getCount(); i++) {
             CurrencyModel currencyModel = (CurrencyModel) currencyAdapter.getList().get(i);
@@ -334,15 +306,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        refreshListOfCurrency();
+
+        //***********************************************************
+
+        //***********************************************************
+    }
+
+    /**
+     * Refresh list of currency
+     */
+    private void refreshListOfCurrency() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Refresh list of currency...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 currencyAdapter.refreshCurrencyAdapter(currency);
+                progressDialog.cancel();
             }
         }).start();
     }
