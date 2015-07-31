@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView value;
     private Spinner spinnerFromCurrency;
     private Spinner spinnerToCurrency;
-    private ArrayAdapter<CharSequence> adapterCurrency;
     private TextView textViewFromCurrency;
     private TextView textViewFromCurrencyName;
     private TextView textViewFromRate;
@@ -49,16 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
 
-    //
-    private HashMap<String, String> listCurrency;
     private Currency currency;
-
-    //**************************************************
-    private Currency currencyTest;
     private String[] listCode;
     private ArrayList<CurrencyModel> list;
     private CurrencyAdapter currencyAdapter;
-    //**************************************************
 
     /**
      * Initialize View elements
@@ -85,29 +77,43 @@ public class MainActivity extends AppCompatActivity {
         // Initialize View elements
         initView();
 
+        // Initialize CurrencyAdapter
+        currency = new Currency();
+        listCode = getResources().getStringArray(R.array.currency);
+        currency.setListCode(listCode);
+        list = currency.getListCurrency();
+
+        currencyAdapter = new CurrencyAdapter(this, list);
+        spinnerFromCurrency.setAdapter(currencyAdapter);
+        spinnerToCurrency.setAdapter(currencyAdapter);
+
+
+
+        /**
         adapterCurrency = ArrayAdapter.createFromResource(this,
                 R.array.currency, android.R.layout.simple_spinner_item );
         adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerFromCurrency.setAdapter(adapterCurrency);
-        spinnerToCurrency.setAdapter(adapterCurrency);
+*/
+        //spinnerFromCurrency.setAdapter(adapterCurrency);
+        //spinnerToCurrency.setAdapter(adapterCurrency);
 
         //ListCurrency listCurrency = new ListCurrency(); // Create
         //listCurrency.execute(); // Start
-        currency = new Currency();
+
 
 
         //************************************************************
-        listCode = getResources().getStringArray(R.array.currency);
+        /**listCode = getResources().getStringArray(R.array.currency);
         currencyTest = new Currency();
         currencyTest.setListCode(listCode);
         //ArrayList<CurrencyModel> list = new ArrayList<CurrencyModel>();
         //list.add(new CurrencyModel("UAH", "Ukraine"));
         //list.add(new CurrencyModel("RUB", "RUSSIA"));
         list = currencyTest.getListCurrency();
-        currencyAdapter = new CurrencyAdapter(this, list, getResources());
-        spinnerFromCurrency.setAdapter(currencyAdapter);
+        currencyAdapter = new CurrencyAdapter(this, list);
 
+        spinnerFromCurrency.setAdapter(currencyAdapter);
+         */
         //************************************************************
     }
 
@@ -189,8 +195,9 @@ public class MainActivity extends AppCompatActivity {
         int numFromCurrency = spinnerFromCurrency.getSelectedItemPosition();
         int numToCurrency = spinnerToCurrency.getSelectedItemPosition();
         // get string result spinners
-        String from = adapterCurrency.getItem(numFromCurrency).toString();
-        String to = adapterCurrency.getItem(numToCurrency).toString();
+        String from = currencyAdapter.getCode(numFromCurrency);
+        String to = currencyAdapter.getCode(numToCurrency);
+        //String to = currencyAdapter.getItem(numToCurrency).toString();
 
         textViewFromCurrency.setText(from);
         textViewToCurrency.setText(to);
@@ -218,12 +225,6 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void getRate(View view) {
-        //************
-        //list = currencyTest.getListCurrency();
-        //currencyAdapter = new CurrencyAdapter(this, list, getResources());
-        //Log.d("Log", list.toString());
-        //spinnerFromCurrency.setAdapter(currencyAdapter);
-        //**************
         ConversionRate conversionRate = new ConversionRate(); // Create
         conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
         ConversionRateInverse conversionRateInverse = new ConversionRateInverse(); // Create
@@ -291,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
     private class ListCurrency extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -319,5 +321,29 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }*/
+
+    public void refreshList(View view) {
+        for (int i = 0; i < currencyAdapter.getCount(); i++) {
+            CurrencyModel currencyModel = (CurrencyModel) currencyAdapter.getList().get(i);
+            currencyModel.setName(currency.getName(currencyModel.getCode()));
+        }
+        currencyAdapter.setNotifyOnChange(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                currencyAdapter.refreshCurrencyAdapter(currency);
+            }
+        }).start();
     }
 }
