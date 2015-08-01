@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.mogsev.currencyconvertor.MainActivity;
-
 import java.util.ArrayList;
 
 /**
@@ -19,10 +17,10 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
     private CurrencyModel currencyModel;
     private LayoutInflater layoutInflater;
 
-    public CurrencyAdapter( MainActivity activity, ArrayList list) {
-        super(activity, android.R.layout.simple_spinner_item, list);
+    public CurrencyAdapter(Context context, ArrayList list) {
+        super(context, android.R.layout.simple_spinner_item, list);
         this.list = list;
-        layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -49,13 +47,21 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
         return row;
     }
 
+    /**
+     * Return ArrayList of CurrencyModel
+     * @return
+     */
     public ArrayList getList() {
         return list;
     }
 
+    /**
+     * Return code of currency
+     * @param position
+     * @return
+     */
     public String getCode(int position) {
         CurrencyModel currencyModel = (CurrencyModel) list.get(position);
-
         return currencyModel.getCode();
     }
 
