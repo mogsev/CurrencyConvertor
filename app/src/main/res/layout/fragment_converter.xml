@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/fragment_vertical_margin"
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".ConverterFragment">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -18,34 +17,26 @@
             android:id="@+id/from_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:layout_weight="1"
-            />
+            android:gravity="left"
+            android:paddingRight="4dp"
+            android:spinnerMode="dialog" />
 
         <View
-            android:layout_width="1dp"
+            android:layout_width="1dip"
             android:layout_height="match_parent"
-            android:background="?android:attr/dividerHorizontal"
-            android:layout_gravity="center"
-            android:layout_weight="0.1"
-            />
+            android:background="?android:attr/dividerHorizontal" />
 
         <Spinner
             android:id="@+id/to_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:layout_weight="1"
-            />
-    </LinearLayout>
+            android:gravity="right"
+            android:paddingLeft="4dp"
+            android:spinnerMode="dialog" />
 
-    <TextView
-        android:id="@+id/value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textSize="22sp" />
+    </LinearLayout>
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_viewResult"
@@ -53,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:elevation="2dp"
         android:translationZ="@dimen/cardview_default_elevation"
         card_view:cardCornerRadius="2dp">
@@ -158,30 +150,157 @@
         </TableLayout>
     </android.support.v7.widget.CardView>
 
+    <EditText
+        android:id="@+id/eValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:maxLength="8"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter value"
+        android:imeOptions="actionDone"
+        android:inputType="number" />
+
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_viewCity"
+        android:id="@+id/card_viewCalculate"
         style="@style/CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:elevation="2dp"
+        android:paddingTop="10dp"
         android:translationZ="@dimen/cardview_default_elevation"
         card_view:cardCornerRadius="2dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingRight="4dp"
+            android:paddingLeft="4dp">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCalculateTo"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="10 UAH = 1.00 USD"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCalculateFrom"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="10 USD = 100.00 UAH"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp" />
+
+<!--
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="10 UAH = 1.00 USD"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="10 USD = 100.00 UAH"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="100.00 UAH = 10.00 USD"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="100.00 USD = 1000.00 UAH"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="1000.00 UAH = 100.00 USD"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="1000.00 USD = 10000.00 UAH"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+            -->
+        </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
 
-
+    <!--
     <Button
         android:id="@+id/btn_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:onClick="getRate"
-        android:text="@string/btn_refresh" />
+        android:text="@string/btn_refresh"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp" />
+        -->
 
     <include
         layout="@layout/btn_refresh_bottom"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

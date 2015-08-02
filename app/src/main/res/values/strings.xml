@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CurrencyConvertor</string>
+    <string name="app_name">CurrencyConverter</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -66,7 +66,6 @@
         <item>SEK</item>
         <item>CHF</item>
         <item>SYP</item>
-        <item>TWD</item>
         <item>THB</item>
         <item>TND</item>
         <item>TRL</item>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 600 -->
-    <color name="ColorPrimary">#039BE5</color>
+    <!-- 200 -->
+    <color name="ColorPrimary">#81D4FA</color>
     <!-- 800 -->
     <color name="ColorPrimaryDark">#0277BD</color>
     <!-- 900 -->

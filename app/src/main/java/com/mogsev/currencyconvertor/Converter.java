@@ -65,7 +65,7 @@ public class Converter extends AppCompatActivity {
      * Initialize View elements
      */
     private void initView() {
-        value = (TextView) this.findViewById(R.id.value);
+        //value = (TextView) this.findViewById(R.id.value);
         spinnerFromCurrency = (Spinner) this.findViewById(R.id.from_currency);
         spinnerToCurrency = (Spinner) this.findViewById(R.id.to_currency);
 

@@ -6,13 +6,16 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mogsev.util.Currency;
 import com.mogsev.util.CurrencyAdapter;
@@ -21,6 +24,7 @@ import com.mogsev.util.CurrencyURL;
 
 import org.w3c.dom.Document;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -41,7 +45,6 @@ public class ConverterFragment extends Fragment {
     private final static String URL_WEB_SERVICE = "http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?";
 
     // Initialize View elements
-    private TextView value;
     private Spinner spinnerFromCurrency;
     private Spinner spinnerToCurrency;
     private TextView textViewFromCurrency;
@@ -50,15 +53,27 @@ public class ConverterFragment extends Fragment {
     private TextView textViewToCurrency;
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
+    private TextView value;
     private Button btnRefresh;
     private Button btnRefreshList;
+    private ProgressDialog progressDialog;
+
+
+    private EditText eValue;
+    private TextView tvCalculateTo;
+    private TextView tvCalculateFrom;
+
+    private String strFrom;
+    private String strTo;
+    private BigDecimal numValueFrom;
+    private BigDecimal numValueTo;
+
 
     private Currency currency;
     private String[] listCode;
     private ArrayList<CurrencyModel> list;
     private CurrencyAdapter currencyAdapter;
 
-    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -103,8 +118,8 @@ public class ConverterFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinnerFromCurrency.setSelection(61);
-        spinnerToCurrency.setSelection(59);
+        spinnerFromCurrency.setSelection(60);
+        spinnerToCurrency.setSelection(58);
 
         refreshListOfCurrency();
         //***********************************************************
@@ -116,7 +131,7 @@ public class ConverterFragment extends Fragment {
      * Initialize View elements
      */
     private void initViewElements() {
-        value = (TextView) view.findViewById(R.id.value);
+        //value = (TextView) view.findViewById(R.id.value);
         spinnerFromCurrency = (Spinner) view.findViewById(R.id.from_currency);
         spinnerToCurrency = (Spinner) view.findViewById(R.id.to_currency);
 
@@ -128,13 +143,8 @@ public class ConverterFragment extends Fragment {
         textViewToCurrencyName = (TextView) view.findViewById(R.id.textViewToCurrencyName);
         textViewToRate = (TextView) view.findViewById(R.id.textViewToRate);
 
-        btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getRate(view);
-            }
-        });
+        //btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
+
 
         btnRefreshList = (Button) view.findViewById(R.id.btn_refresh_bottom);
         btnRefreshList.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +153,36 @@ public class ConverterFragment extends Fragment {
                 getRate(view);
             }
         });
+
+        eValue = (EditText) view.findViewById(R.id.eValue);
+        eValue.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER ) {
+                    //Toast.makeText(getActivity().getBaseContext(), eValue.getText(), Toast.LENGTH_SHORT).show();
+                    if (!eValue.getText().toString().equals("") && eValue.getText() != null) {
+                        String str = eValue.getText().toString();
+                        BigDecimal calc = BigDecimal.valueOf(Double.parseDouble(str));
+                        //calc = Integer.getInteger(eValue.getText().toString());
+                        Log.d("calculate", str + " " + String.valueOf(calc));
+
+                        try {
+                            calculateValue(calc);
+                        } catch (Exception ex) {
+                            Toast.makeText(getActivity().getBaseContext(), "Update currency", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+
+        tvCalculateTo = (TextView) view.findViewById(R.id.tvCalculateTo);
+        tvCalculateFrom = (TextView) view.findViewById(R.id.tvCalculateFrom);
+
     }
 
     /**
@@ -160,24 +200,24 @@ public class ConverterFragment extends Fragment {
         int numFromCurrency = spinnerFromCurrency.getSelectedItemPosition();
         int numToCurrency = spinnerToCurrency.getSelectedItemPosition();
         // get string result spinners
-        String from = currencyAdapter.getCode(numFromCurrency);
-        String to = currencyAdapter.getCode(numToCurrency);
+        strFrom = currencyAdapter.getCode(numFromCurrency);
+        strTo = currencyAdapter.getCode(numToCurrency);
         //String to = currencyAdapter.getItem(numToCurrency).toString();
 
-        textViewFromCurrency.setText(from);
-        textViewToCurrency.setText(to);
+        textViewFromCurrency.setText(strFrom);
+        textViewToCurrency.setText(strTo);
 
-        textViewFromCurrencyName.setText(currency.getName(from));
-        textViewToCurrencyName.setText(currency.getName(to));
+        textViewFromCurrencyName.setText(currency.getName(strFrom));
+        textViewToCurrencyName.setText(currency.getName(strTo));
 
         switch (i) {
             case CurrencyURL.URL_NORMAL:
-                url.append(CurrencyURL.FROM).append(from);
-                url.append(CurrencyURL.TO).append(to);
+                url.append(CurrencyURL.FROM).append(strFrom);
+                url.append(CurrencyURL.TO).append(strTo);
                 break;
             case CurrencyURL.URL_INVERSE:
-                url.append(CurrencyURL.FROM).append(to);
-                url.append(CurrencyURL.TO).append(from);
+                url.append(CurrencyURL.FROM).append(strTo);
+                url.append(CurrencyURL.TO).append(strFrom);
                 break;
         }
 
@@ -236,7 +276,8 @@ public class ConverterFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String str) {
-            value.setText(String.valueOf(checkConversionResult(str)));
+            numValueFrom = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+            //value.setText(String.valueOf(checkConversionResult(str)));
             textViewFromRate.setText(String.valueOf(checkConversionResult(str)));
         }
     }
@@ -252,6 +293,7 @@ public class ConverterFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String str) {
+            numValueTo = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
             textViewToRate.setText(String.valueOf(checkConversionResult(str)));
         }
     }
@@ -286,6 +328,19 @@ public class ConverterFragment extends Fragment {
         }).start();
     }
 
+    private void calculateValue(BigDecimal calc) {
+        Log.d("calculate", "Start");
+        BigDecimal resultFrom = calc.multiply(numValueFrom);
+        BigDecimal resultTo = calc.multiply(numValueTo);
+
+
+        tvCalculateFrom.setText(calc + " " + strFrom + " = ");
+        tvCalculateFrom.append(resultFrom + " " + strTo);
+
+        tvCalculateTo.setText(calc + " " + strTo + " = ");
+        tvCalculateTo.append(resultTo + " " + strFrom);
+        Log.d("calculate", "end");
+    }
 
 
 }
