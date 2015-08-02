@@ -61,8 +61,6 @@ public class Converter extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
-
-
     /**
      * Initialize View elements
      */

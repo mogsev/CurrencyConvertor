@@ -51,6 +51,7 @@ public class ConverterFragment extends Fragment {
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
     private Button btnRefresh;
+    private Button btnRefreshList;
 
     private Currency currency;
     private String[] listCode;
@@ -104,6 +105,8 @@ public class ConverterFragment extends Fragment {
         });
         spinnerFromCurrency.setSelection(61);
         spinnerToCurrency.setSelection(59);
+
+        refreshListOfCurrency();
         //***********************************************************
 
         return view;
@@ -127,6 +130,14 @@ public class ConverterFragment extends Fragment {
 
         btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
         btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getRate(view);
+            }
+        });
+
+        btnRefreshList = (Button) view.findViewById(R.id.btn_refresh_bottom);
+        btnRefreshList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getRate(view);
@@ -257,7 +268,7 @@ public class ConverterFragment extends Fragment {
      * Refresh list of currency
      */
     private void refreshListOfCurrency() {
-        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Refresh list of currency...");
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -274,5 +285,7 @@ public class ConverterFragment extends Fragment {
             }
         }).start();
     }
+
+
 
 }

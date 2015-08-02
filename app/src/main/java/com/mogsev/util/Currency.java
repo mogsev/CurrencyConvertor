@@ -118,10 +118,4 @@ public class Currency {
             listCurrency.add(new CurrencyModel(code));
         }
     }
-
-    //*************************** Dialog start **************************************
-
-
-
-    //************************** End Dialog *****************************************
 }
