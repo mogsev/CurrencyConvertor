@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
-    tools:context=".ConverterFragment">
+    tools:context="com.mogsev.currencyconvertor.ConverterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

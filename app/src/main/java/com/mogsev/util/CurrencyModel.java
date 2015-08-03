@@ -56,6 +56,6 @@ public class CurrencyModel {
 
     @Override
     public String toString() {
-        return "Code: " + code + "\t" + "Name: " + name + "\t" + "Name english: " + nameEnglish;
+        return "Code: " + this.code + "\t" + "Name: " + this.name + "\t" + "Name english: " + this.nameEnglish + "\t";
     }
 }

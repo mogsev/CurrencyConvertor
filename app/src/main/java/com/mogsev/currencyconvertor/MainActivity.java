@@ -20,14 +20,13 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Converter","Informer","Metal"};
-    int Numboftabs = 3;
+    CharSequence Titles[]={"Converter","Informer"};
+    int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
 

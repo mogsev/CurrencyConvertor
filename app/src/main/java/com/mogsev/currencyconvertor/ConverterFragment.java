@@ -38,6 +38,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ConverterFragment extends Fragment {
     private View view;
 
+    private final static String TAG = "ConverterFragment";
     private final static String CRR = "ConversionRateResult";
     private final static String CRE = "ConversionRateException";
     private final static String GET_URL = "GetURL";
@@ -158,8 +159,8 @@ public class ConverterFragment extends Fragment {
         eValue.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER ) {
-                    //Toast.makeText(getActivity().getBaseContext(), eValue.getText(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, String.valueOf(keyCode) + " " + event.getAction());
+                if (event.getAction() == 1 || keyCode == KeyEvent.KEYCODE_ENTER) {
                     if (!eValue.getText().toString().equals("") && eValue.getText() != null) {
                         String str = eValue.getText().toString();
                         BigDecimal calc = BigDecimal.valueOf(Double.parseDouble(str));
@@ -276,8 +277,11 @@ public class ConverterFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String str) {
-            numValueFrom = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
-            //value.setText(String.valueOf(checkConversionResult(str)));
+            try {
+                numValueFrom = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+            } catch (Exception ex) {
+
+            }
             textViewFromRate.setText(String.valueOf(checkConversionResult(str)));
         }
     }
@@ -293,7 +297,11 @@ public class ConverterFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String str) {
-            numValueTo = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+            try {
+                numValueTo = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+            } catch (Exception ex) {
+
+            }
             textViewToRate.setText(String.valueOf(checkConversionResult(str)));
         }
     }
@@ -341,6 +349,4 @@ public class ConverterFragment extends Fragment {
         tvCalculateTo.append(resultTo + " " + strFrom);
         Log.d("calculate", "end");
     }
-
-
 }
