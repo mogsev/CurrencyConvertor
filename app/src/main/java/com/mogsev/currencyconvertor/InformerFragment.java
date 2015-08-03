@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,10 +28,12 @@ public class InformerFragment extends Fragment {
     private TextView tvBuyDelta;
     private TextView tvSaleDelta;
 
+    private String[] cityData;
+
     public static InformerFragment newInstance() {
         InformerFragment fragment = new InformerFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -38,7 +42,10 @@ public class InformerFragment extends Fragment {
 
     }
 
-    public void initView() {
+    /**
+     * Initialize view elements
+     */
+    private void initView() {
         spinner = (Spinner) view.findViewById(R.id.spinnerCityInformer);
         scrollView = (ScrollView) view.findViewById(R.id.scrollViewInformer);
         tvName = (TextView) view.findViewById(R.id.tvInformerName);
@@ -47,10 +54,32 @@ public class InformerFragment extends Fragment {
         tvBuyDelta = (TextView) view.findViewById(R.id.tvInformerBuyDelta);
         tvSale = (TextView) view.findViewById(R.id.tvInformerSale);
         tvSaleDelta = (TextView) view.findViewById(R.id.tvInformerSaleDelta);
+    }
+
+    /**
+     * Initialize data
+     */
+    private void initData() {
+        cityData = getResources().getStringArray(R.array.city);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         CurrencyInformer cur = new CurrencyInformer.Builder("UAH")
                 .buy("24.00").sale("23.00").buyDelta("-0.235").saleDelta("-0568").name("Grivna").build();
         Log.d(TAG, cur.toString());
-
     }
 
     @Override
@@ -65,6 +94,7 @@ public class InformerFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_informer, container, false);
         initView();
+        initData();
         return view;
     }
 
