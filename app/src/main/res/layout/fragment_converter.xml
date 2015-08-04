@@ -150,18 +150,18 @@
         </TableLayout>
     </android.support.v7.widget.CardView>
 
-    <EditText
+    <EditText xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/eValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:maxLength="8"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter value"
         android:imeOptions="actionDone"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="8" />
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_viewCalculate"
@@ -178,104 +178,103 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp">
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp">
 
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCalculateTo"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="10 UAH = 1.00 USD"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCalculateFrom"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="10 USD = 100.00 UAH"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp" />
-
-<!--
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvCalculateTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="5dp">
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="10 UAH = 1.00 USD"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="10 UAH = 1.00 USD"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="10 USD = 100.00 UAH"
-                    android:textSize="10sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvCalculateFrom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="5dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="10 USD = 100.00 UAH"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="100.00 UAH = 10.00 USD"
-                    android:textSize="10sp" />
+            <!--
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="100.00 USD = 1000.00 UAH"
-                    android:textSize="10sp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="10 UAH = 1.00 USD"
+                                android:textSize="10sp" />
 
-            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="10 USD = 100.00 UAH"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100.00 UAH = 10.00 USD"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100.00 USD = 1000.00 UAH"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="5dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="1000.00 UAH = 100.00 USD"
-                    android:textSize="10sp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="1000.00 UAH = 100.00 USD"
+                                android:textSize="10sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="1000.00 USD = 10000.00 UAH"
-                    android:textSize="10sp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="1000.00 USD = 10000.00 UAH"
+                                android:textSize="10sp" />
 
-            </LinearLayout>
-            -->
+                        </LinearLayout>
+                        -->
         </LinearLayout>
 
 

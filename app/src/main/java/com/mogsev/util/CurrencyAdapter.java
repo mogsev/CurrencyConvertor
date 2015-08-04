@@ -65,6 +65,10 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
         return currencyModel.getCode();
     }
 
+    /**
+     * Refresh Currency Adapter
+     * @param currency
+     */
     public void refreshCurrencyAdapter(Currency currency) {
         for (int i = 0; i < this.getCount(); i++) {
             CurrencyModel currencyModel = (CurrencyModel) this.getList().get(i);

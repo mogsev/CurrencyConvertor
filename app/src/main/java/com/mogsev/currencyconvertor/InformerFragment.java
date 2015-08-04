@@ -1,5 +1,7 @@
 package com.mogsev.currencyconvertor;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mogsev.util.CurrencyInformer;
+import com.mogsev.util.InformerAdapter;
+
+import java.util.ArrayList;
 
 public class InformerFragment extends Fragment {
     private static final String TAG = "InformerFragment";
@@ -27,8 +32,12 @@ public class InformerFragment extends Fragment {
     private TextView tvSale;
     private TextView tvBuyDelta;
     private TextView tvSaleDelta;
+    private ProgressDialog progressDialog;
 
     private String[] cityData;
+    private ArrayAdapter<String> adapter;
+    InformerAdapter informerAdapter = new InformerAdapter();
+
 
     public static InformerFragment newInstance() {
         InformerFragment fragment = new InformerFragment();
@@ -39,7 +48,6 @@ public class InformerFragment extends Fragment {
 
     public InformerFragment() {
         // Required empty public constructor
-
     }
 
     /**
@@ -61,8 +69,7 @@ public class InformerFragment extends Fragment {
      */
     private void initData() {
         cityData = getResources().getStringArray(R.array.city);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
+        adapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,5 +104,6 @@ public class InformerFragment extends Fragment {
         initData();
         return view;
     }
+
 
 }

@@ -101,6 +101,7 @@ public class ConverterFragment extends Fragment {
                 CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
                 textViewFromCurrency.setText(currencyModel.getCode());
                 textViewFromCurrencyName.setText(currencyModel.getName());
+                showCalc();
             }
 
             @Override
@@ -113,6 +114,7 @@ public class ConverterFragment extends Fragment {
                 CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
                 textViewToCurrency.setText(currencyModel.getCode());
                 textViewToCurrencyName.setText(currencyModel.getName());
+                showCalc();
             }
 
             @Override
@@ -134,6 +136,7 @@ public class ConverterFragment extends Fragment {
     private void initViewElements() {
         //value = (TextView) view.findViewById(R.id.value);
         spinnerFromCurrency = (Spinner) view.findViewById(R.id.from_currency);
+
         spinnerToCurrency = (Spinner) view.findViewById(R.id.to_currency);
 
         textViewFromCurrency = (TextView) view.findViewById(R.id.textViewFromCurrency);
@@ -144,8 +147,6 @@ public class ConverterFragment extends Fragment {
         textViewToCurrencyName = (TextView) view.findViewById(R.id.textViewToCurrencyName);
         textViewToRate = (TextView) view.findViewById(R.id.textViewToRate);
 
-        //btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
-
 
         btnRefreshList = (Button) view.findViewById(R.id.btn_refresh_bottom);
         btnRefreshList.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +155,11 @@ public class ConverterFragment extends Fragment {
                 getRate(view);
             }
         });
+        btnRefreshList.setFocusableInTouchMode(true);
+        btnRefreshList.requestFocus();
+
+        tvCalculateTo = (TextView) view.findViewById(R.id.tvCalculateTo);
+        tvCalculateFrom = (TextView) view.findViewById(R.id.tvCalculateFrom);
 
         eValue = (EditText) view.findViewById(R.id.eValue);
         eValue.setOnKeyListener(new View.OnKeyListener() {
@@ -161,29 +167,26 @@ public class ConverterFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.d(TAG, String.valueOf(keyCode) + " " + event.getAction());
                 if (event.getAction() == 1 || keyCode == KeyEvent.KEYCODE_ENTER) {
-                    if (!eValue.getText().toString().equals("") && eValue.getText() != null) {
-                        String str = eValue.getText().toString();
-                        BigDecimal calc = BigDecimal.valueOf(Double.parseDouble(str));
-                        //calc = Integer.getInteger(eValue.getText().toString());
-                        Log.d("calculate", str + " " + String.valueOf(calc));
-
-                        try {
-                            calculateValue(calc);
-                        } catch (Exception ex) {
-                            Toast.makeText(getActivity().getBaseContext(), "Update currency", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                    showCalc();
                     return true;
                 } else {
                     return false;
                 }
             }
         });
+    }
 
-
-        tvCalculateTo = (TextView) view.findViewById(R.id.tvCalculateTo);
-        tvCalculateFrom = (TextView) view.findViewById(R.id.tvCalculateFrom);
-
+    private void showCalc() {
+        if (!eValue.getText().toString().equals("") && eValue.getText() != null) {
+            String str = eValue.getText().toString();
+            BigDecimal calc = BigDecimal.valueOf(Double.parseDouble(str));
+            Log.d("showCalc", str + " " + String.valueOf(calc));
+            try {
+                calculateValue(calc);
+            } catch (Exception ex) {
+                Toast.makeText(getActivity().getBaseContext(), "Update currency", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     /**
