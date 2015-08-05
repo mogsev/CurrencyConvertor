@@ -26,24 +26,20 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View row = layoutInflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
-
         currencyModel = (CurrencyModel) list.get(position);
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(currencyModel.getCode());
         textView.append(" - ");
         textView.append(String.valueOf(currencyModel.getName()));
-
         return row;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = layoutInflater.inflate(android.R.layout.simple_spinner_item, parent, false);
-
         currencyModel = (CurrencyModel) list.get(position);
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(currencyModel.getCode());
-
         return row;
     }
 

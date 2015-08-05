@@ -85,7 +85,7 @@ public class ConverterFragment extends Fragment {
         initViewElements();
 
         // Initialize CurrencyAdapter
-        currency = new Currency();
+        currency = Currency.getInstance();
         listCode = getResources().getStringArray(R.array.currency);
         currency.setListCode(listCode);
         list = currency.getListCurrency();
@@ -101,7 +101,10 @@ public class ConverterFragment extends Fragment {
                 CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
                 textViewFromCurrency.setText(currencyModel.getCode());
                 textViewFromCurrencyName.setText(currencyModel.getName());
-                showCalc();
+                getRate();
+                eValue.setText("");
+                tvCalculateFrom.setText("");
+                tvCalculateTo.setText("");
             }
 
             @Override
@@ -114,15 +117,18 @@ public class ConverterFragment extends Fragment {
                 CurrencyModel currencyModel = (CurrencyModel) parent.getSelectedItem();
                 textViewToCurrency.setText(currencyModel.getCode());
                 textViewToCurrencyName.setText(currencyModel.getName());
-                showCalc();
+                getRate();
+                eValue.setText("");
+                tvCalculateFrom.setText("");
+                tvCalculateTo.setText("");
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinnerFromCurrency.setSelection(60);
-        spinnerToCurrency.setSelection(58);
+        spinnerFromCurrency.setSelection(59);
+        spinnerToCurrency.setSelection(57);
 
         refreshListOfCurrency();
         //***********************************************************
@@ -239,6 +245,13 @@ public class ConverterFragment extends Fragment {
         conversionRateInverse.execute(getUrl(CurrencyURL.URL_INVERSE)); // Start
     }
 
+    private void getRate() {
+        ConversionRate conversionRate = new ConversionRate(); // Create
+        conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
+        ConversionRateInverse conversionRateInverse = new ConversionRateInverse(); // Create
+        conversionRateInverse.execute(getUrl(CurrencyURL.URL_INVERSE)); // Start
+    }
+
     /**
      * @param str
      * @return
@@ -329,7 +342,7 @@ public class ConverterFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

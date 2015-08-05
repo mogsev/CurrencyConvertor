@@ -2,6 +2,7 @@ package com.mogsev.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Looper;
 import android.util.Log;
 
@@ -26,18 +27,24 @@ public class Currency {
     private static final String URL = "http://www.nbrb.by/Services/XmlExRatesRef.aspx";
     private static final String TAG_NAME = "Currency";
 
-    private HashMap<String, String> hashName;
-    private HashMap<String, String> hashNameEnglish;
+    private HashMap<String, String> hashName = new HashMap<>();
+    private HashMap<String, String> hashNameEnglish = new HashMap<>();
     private String[] listCode;
-    private ArrayList<CurrencyModel> listCurrency;
+    private ArrayList<CurrencyModel> listCurrency = new ArrayList<>();
+
+
+    public static Currency getInstance() {
+        return SingletonCurrency.instance;
+    }
+
+    private static class SingletonCurrency {
+        private final static Currency instance = new Currency();
+    }
 
     /**
      * Main constructor
      */
-    public Currency() {
-        hashName = new HashMap<>();
-        hashNameEnglish = new HashMap<>();
-        listCurrency = new ArrayList<CurrencyModel>();
+    private Currency() {
         initHash();
     }
 
@@ -117,5 +124,9 @@ public class Currency {
             code = listCode[i];
             listCurrency.add(new CurrencyModel(code));
         }
+    }
+
+    public HashMap<String, String> getHashName() {
+        return hashName;
     }
 }

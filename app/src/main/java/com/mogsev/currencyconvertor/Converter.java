@@ -87,7 +87,7 @@ public class Converter extends AppCompatActivity {
         initView();
 
         // Initialize CurrencyAdapter
-        currency = new Currency();
+        currency = Currency.getInstance();
         listCode = getResources().getStringArray(R.array.currency);
         currency.setListCode(listCode);
         list = currency.getListCurrency();

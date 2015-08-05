@@ -11,11 +11,16 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:spinnerMode="dialog" />
-
+<!--
     <ScrollView
         android:id="@+id/scrollViewInformer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal" />
+-->
+    <ListView
+        android:id="@+id/listViewInformer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

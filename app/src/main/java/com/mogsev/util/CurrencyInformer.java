@@ -9,6 +9,10 @@ public class CurrencyInformer extends CurrencyModel {
     private String buyDelda;
     private String saleDelta;
 
+    public CurrencyInformer(String code) {
+        super(code);
+    }
+
     private CurrencyInformer(Builder builder) {
         this.setCode(builder.code);
         this.setName(builder.name);
