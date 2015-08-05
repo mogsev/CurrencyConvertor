@@ -99,8 +99,8 @@ public class InformerFragment extends Fragment {
             listCash.add(new CurrencyInformer(cash[i]));
         }
         CashAdapter cashAdapter = new CashAdapter(getActivity().getBaseContext(), listCash);
-        ListView listView = (ListView) view.findViewById(R.id.listViewInformer);
-        listView.setAdapter(cashAdapter);
+        //ListView listView = (ListView) view.findViewById(R.id.listViewInformer);
+        //listView.setAdapter(cashAdapter);
 
     }
 

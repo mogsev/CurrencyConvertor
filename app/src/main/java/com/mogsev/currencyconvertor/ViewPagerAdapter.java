@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.mogsev.load.CashFragment;
+
 /**
  * Created by hp1 on 21-01-2015.
  */
@@ -34,7 +36,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            return InformerFragment.newInstance();
+            return new CashFragment();
         }
     }
 

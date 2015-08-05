@@ -319,6 +319,7 @@ public class ConverterFragment extends Fragment {
 
             }
             textViewToRate.setText(String.valueOf(checkConversionResult(str)));
+            calculateValue(new BigDecimal(1));
         }
     }
 

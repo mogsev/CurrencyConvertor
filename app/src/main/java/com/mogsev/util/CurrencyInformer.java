@@ -82,6 +82,7 @@ public class CurrencyInformer extends CurrencyModel {
 
     @Override
     public String toString() {
-        return super.toString() + "Buy: " + this.buy + "\t" + "Sale: " + this.sale + "\t";
+        return super.toString() + "Buy: " + this.buy + "\t" + "Sale: " + this.sale + "\t"
+                + "BuyDelta: " + this.buyDelda + "\t" + "SaleDelta: " + this.saleDelta;
     }
 }
