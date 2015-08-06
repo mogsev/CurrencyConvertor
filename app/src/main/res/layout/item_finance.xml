@@ -15,7 +15,7 @@
         android:padding="6dp">
 
         <TextView
-            android:id="@+id/tvInformerName"
+            android:id="@+id/tvFinanceTitle"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
         android:padding="6dp">
 
         <TextView
-            android:id="@+id/tvInformerCode"
+            android:id="@+id/tvFinanceCity"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

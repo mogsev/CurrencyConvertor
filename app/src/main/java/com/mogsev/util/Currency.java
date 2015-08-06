@@ -1,13 +1,8 @@
 package com.mogsev.util;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.database.CursorIndexOutOfBoundsException;
-import android.os.Looper;
 import android.util.Log;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -15,7 +10,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Handler;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,7 +25,6 @@ public class Currency {
     private HashMap<String, String> hashNameEnglish = new HashMap<>();
     private String[] listCode;
     private ArrayList<CurrencyModel> listCurrency = new ArrayList<>();
-
 
     public static Currency getInstance() {
         return SingletonCurrency.instance;

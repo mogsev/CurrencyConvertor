@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Converter","Informer"};
-    int Numboftabs = 2;
+    CharSequence Titles[]={"Converter", "Informer", "Cities & Regions"};
+    int Numboftabs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
     }
 
 

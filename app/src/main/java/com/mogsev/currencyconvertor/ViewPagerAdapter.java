@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.mogsev.load.CashFragment;
-
 /**
  * Created by hp1 on 21-01-2015.
  */
@@ -22,7 +20,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
         super(fm);
-
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
     }
@@ -31,13 +28,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // if the position is 0 we are returning the First tab
-        if(position == 0) {
-            return new ConverterFragment();
+        switch (position) {
+            case 0:
+                return new ConverterFragment();
+            case 1:
+                return new CashFragment();
+            case 2:
+                return new FinanceFragment();
         }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
-            return new CashFragment();
-        }
+        return null;
     }
 
     // This method return the titles for the Tabs in the Tab Strip

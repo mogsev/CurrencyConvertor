@@ -6,4 +6,7 @@
     <color name="ColorPrimaryDark">#0277BD</color>
     <!-- 900 -->
     <color name="tabsScrollColor">#01579B</color>
+
+    <color name="ColorDeltaUp">#388E3C</color>
+    <color name="ColorDeltaDown">#D50000</color>
 </resources>

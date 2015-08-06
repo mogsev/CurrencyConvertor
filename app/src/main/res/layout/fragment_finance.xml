@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.mogsev.currencyconvertor.InformerFragment">
+    tools:context="com.mogsev.currencyconvertor.FinanceFragment">
 
     <Spinner
-        android:id="@+id/spinnerCityInformer"
+        android:id="@+id/spinnerCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"

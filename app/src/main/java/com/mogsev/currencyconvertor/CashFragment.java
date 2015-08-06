@@ -1,11 +1,8 @@
-package com.mogsev.load;
+package com.mogsev.currencyconvertor;
 
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
-import com.mogsev.currencyconvertor.R;
+import com.mogsev.util.CashLoader;
 import com.mogsev.util.CashAdapter;
 import com.mogsev.util.CurrencyInformer;
+import com.mogsev.util.FinanceAdapter;
+import com.mogsev.util.FinanceLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,10 +26,8 @@ import java.util.List;
 public class CashFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<CurrencyInformer>> {
     private static final String TAG = "CashFragment";
     private static final int LOADER_CASH = 1;
-    private LoaderManager.LoaderCallbacks mCallbacks;
-    private SimpleCursorAdapter mAdapter;
+    private static final int LOADER_FINANCE = 2;
     CashAdapter cashAdapter;
-    ArrayList<CurrencyInformer> listCash = new ArrayList<>();
 
     private View view;
     private String[] cityData;
@@ -51,7 +46,7 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
         // Initialize spinner start
         cityData = getResources().getStringArray(R.array.city);
         spinner = (Spinner) view.findViewById(R.id.spinnerCityInformer);
-        spinnerAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
+        spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -67,22 +62,16 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
         });
         // Initialize spinner end
 
-        //Initialize CashAdapter
-        String[] cash = getResources().getStringArray(R.array.cash);
-        for (int i = 0; i < cash.length - 1; i++) {
-            listCash.add(new CurrencyInformer(cash[i]));
-        }
-        cashAdapter = new CashAdapter(getActivity(), listCash);
-        //cashAdapter = new CashAdapter(getActivity());
+        cashAdapter = new CashAdapter(getActivity());
         setListAdapter(cashAdapter);
 
         // Initialize LoadManager
         getLoaderManager().initLoader(LOADER_CASH, null, this);
+        getLoaderManager().initLoader(LOADER_FINANCE, null, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_informer, container, false);
         return view;
     }
@@ -110,6 +99,6 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(Loader<List<CurrencyInformer>> loader) {
         Log.d(TAG, "onLoaderReset start");
-        cashAdapter.setData(null);
+        //cashAdapter.setData(null);
     }
 }

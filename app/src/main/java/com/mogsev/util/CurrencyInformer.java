@@ -19,7 +19,7 @@ public class CurrencyInformer extends CurrencyModel {
         this.buy = builder.buy;
         this.sale = builder.sale;
         this.buyDelda = builder.buyDelda;
-        this.saleDelta = builder.buyDelda;
+        this.saleDelta = builder.saleDelta;
     }
 
     public String getBuy() {
