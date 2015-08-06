@@ -69,11 +69,6 @@ public class CashLoader extends AsyncTaskLoader<List<CurrencyInformer>> {
         }
     }
 
-    @Override
-    public void deliverResult(List<CurrencyInformer> data) {
-        super.deliverResult(data);
-    }
-
     /**
      * Initialization data of currency
      */

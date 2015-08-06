@@ -29,7 +29,6 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     private static final int LOADER_FINANCE = 2;
     FinanceAdapter financeAdapter;
 
-
     private View view;
     private String[] cityData;
     private ArrayAdapter<String> spinnerAdapter;
@@ -53,7 +52,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //financeAdapter.setCity();
+                financeAdapter.notifyCity((String) parent.getSelectedItem());
             }
 
             @Override
@@ -78,19 +77,13 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     @Override
     public Loader<List<Finance>> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader start");
-        Loader loader = null;
-        switch (id) {
-            case LOADER_FINANCE:
-                Log.d(TAG, "Create LOADER_FINANCE");
-                loader = new FinanceLoader(getActivity());
-                break;
-        }
-        return loader;
+        return new FinanceLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(Loader<List<Finance>> loader, List<Finance> data) {
         Log.d(TAG, "onLoadFinished start");
+        // Set the new data in the adapter.
         financeAdapter.setData(data);
     }
 
@@ -98,6 +91,6 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     @Override
     public void onLoaderReset(Loader<List<Finance>> loader) {
         Log.d(TAG, "onLoaderReset start");
-        //cashAdapter.setData(null);
+        financeAdapter.setData(null);
     }
 }

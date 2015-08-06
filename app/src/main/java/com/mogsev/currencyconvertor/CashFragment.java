@@ -92,8 +92,10 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<List<CurrencyInformer>> loader, List<CurrencyInformer> data) {
         Log.d(TAG, "onLoadFinished start");
+        // Set the new data in the adapter.
         cashAdapter.setData(data);
     }
+
 
 
     @Override

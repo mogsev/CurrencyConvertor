@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.mogsev.currencyconvertor.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
     private TextView title;
     private TextView city;
     private Finance finance;
+    private List<Finance> financesList = new ArrayList<>();
 
     public FinanceAdapter(Context context) {
         super(context, R.layout.item_finance);
@@ -33,16 +35,13 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
         super(context, resource);
     }
 
-    public void setData(List<Finance> data) {
-        Log.d(TAG, "setData start");
-        this.clear();
-        if (data != null) {
-            this.addAll(data);
-        }
-        this.notifyDataSetChanged();
-        Log.d(TAG, "setData " + data.toString());
-    }
-
+    /**
+     * Populate new items in the list.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -53,5 +52,30 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
         ((TextView) view.findViewById(R.id.tvFinanceTitle)).setText(finance.getTitle());
         ((TextView) view.findViewById(R.id.tvFinanceCity)).setText(finance.getCity());
         return view;
+    }
+
+    /**
+     * Set the new data in adapter
+     * @param data
+     */
+    public void setData(List<Finance> data) {
+        Log.d(TAG, "setData start");
+        this.clear();
+        if (data != null) {
+            financesList = data;
+            this.addAll(data);
+        }
+        Log.d(TAG, "setData end");
+    }
+
+    public void notifyCity(String city) {
+        Log.d(TAG, "notifyCity start");
+        this.clear();
+        for (Finance finance : financesList) {
+            if (finance.getCity().equals(city)) {
+                this.add(finance);
+            }
+        }
+        Log.d(TAG, "notifyCity end");
     }
 }

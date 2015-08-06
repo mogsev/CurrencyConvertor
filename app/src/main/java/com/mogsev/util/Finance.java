@@ -1,5 +1,6 @@
 package com.mogsev.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public class Finance {
     private String city;
     private String phone;
     private String address;
-    private List<CurrencyInformer> currencies;
+    private List<CurrencyInformer> listCurrencies = new ArrayList<>();
 
     private Finance(Builder builder) {
         this.title = builder.title;
@@ -42,9 +43,18 @@ public class Finance {
     }
 
     public List<CurrencyInformer> getCurrencies() {
-        return currencies;
+        return listCurrencies;
     }
 
+    public void addCurrency(CurrencyInformer currency) {
+        if (currency != null) {
+            listCurrencies.add(currency);
+        }
+    }
+
+    /**
+     * Builder
+     */
     public static class Builder {
         private String title;
         private String region;
@@ -85,6 +95,6 @@ public class Finance {
     @Override
     public String toString() {
         return "Title: " + this.title + "\t" + "Region: " + this.region + "\t"
-                + "City: " + this.city + "\t" + "Phone: " + this.phone + "Address: " + this.address;
+                + "City: " + this.city + "\t" + "Phone: " + this.phone + "\t" + "Address: " + this.address;
     }
 }
