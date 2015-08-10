@@ -30,9 +30,9 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
     CashAdapter cashAdapter;
 
     private View view;
-    private String[] cityData;
-    private ArrayAdapter<String> spinnerAdapter;
-    private Spinner spinner;
+    //private String[] cityData;
+    //private ArrayAdapter<String> spinnerAdapter;
+    //private Spinner spinner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
         super.onActivityCreated(savedInstanceState);
 
         // Initialize spinner start
+        /**
         cityData = getResources().getStringArray(R.array.city);
         spinner = (Spinner) view.findViewById(R.id.spinnerCityInformer);
         spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
@@ -61,13 +62,15 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
             }
         });
         // Initialize spinner end
+         */
 
         cashAdapter = new CashAdapter(getActivity());
         setListAdapter(cashAdapter);
 
+
         // Initialize LoadManager
         getLoaderManager().initLoader(LOADER_CASH, null, this);
-        getLoaderManager().initLoader(LOADER_FINANCE, null, this);
+        //getLoaderManager().initLoader(LOADER_FINANCE, null, this);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mogsev.currencyconvertor.R;
@@ -20,13 +21,13 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
     private static final String TAG = "FinanceAdapter";
     Context context;
     private LayoutInflater layoutInflater;
-    private TextView title;
-    private TextView city;
+    private TextView tvCity;
+    private TextView tvAddress;
     private Finance finance;
     private List<Finance> financesList = new ArrayList<>();
 
     public FinanceAdapter(Context context) {
-        super(context, R.layout.item_finance);
+        super(context, R.layout.item_finance_currency);
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -49,8 +50,35 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
             view = layoutInflater.inflate(R.layout.item_finance, parent, false);
         }
         finance = this.getItem(position);
-        ((TextView) view.findViewById(R.id.tvFinanceTitle)).setText(finance.getTitle());
-        ((TextView) view.findViewById(R.id.tvFinanceCity)).setText(finance.getCity());
+        ((TextView) view.findViewById(R.id.tvBankTitle)).setText(finance.getTitle());
+        tvCity = (TextView) view.findViewById(R.id.tvBankCity);
+        tvCity.setText(R.string.short_city);
+        tvCity.append(" ");
+        tvCity.append(finance.getCity());
+        tvCity.append("\t");
+        tvCity.append(finance.getRegion());
+        tvAddress = (TextView) view.findViewById(R.id.tvBankAddress);
+        tvAddress.setText(finance.getAddress());
+        tvAddress.append("\t");
+        tvAddress.append("Tel.");
+        tvAddress.append(" ");
+        tvAddress.append(finance.getPhone());
+
+        //**************************************************************************
+        LinearLayout llCurrency = (LinearLayout) view.findViewById(R.id.llFinance);
+        List list = finance.getCurrencies();
+
+        for (int i = 0; i < list.size(); i ++) {
+            View viewCur = layoutInflater.inflate(R.layout.item_finance_currency, parent, false);
+            CurrencyInformer cur = (CurrencyInformer) list.get(i);
+            ((TextView) viewCur.findViewById(R.id.tvCurrencyName)).setText(cur.getCode());
+            ((TextView) viewCur.findViewById(R.id.tvCurrencyBuy)).setText(cur.getBuy());
+            ((TextView) viewCur.findViewById(R.id.tvCurrencySale)).setText(cur.getSale());
+            llCurrency.addView(viewCur);
+        }
+
+        //llCurrency.addView(viewCur);
+        //*************************************************************************
         return view;
     }
 

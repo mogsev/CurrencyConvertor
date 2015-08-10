@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.mogsev.currencyconvertor.InformerFragment">
-
+<!--
     <Spinner
         android:id="@+id/spinnerCityInformer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:spinnerMode="dialog" />
-
+-->
     <ListView
         android:id="@id/android:list"
         android:layout_width="match_parent"

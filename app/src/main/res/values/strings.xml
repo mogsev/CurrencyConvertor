@@ -9,6 +9,9 @@
     <string name="currency_name">Название</string>
     <string name="rate">Курс</string>
 
+    <string name="short_phone">Тел.</string>
+    <string name="short_city">г.</string>
+
     <!-- Spinners -->
     <string-array name="currency">
         <item>DZD</item>

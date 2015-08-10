@@ -57,13 +57,21 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
         saleDelta = (TextView) view.findViewById(R.id.tvInformerSaleDelta);
         buyDelta.setText(cur.getBuyDelda());
         saleDelta.setText(cur.getSaleDelta());
-        if (Double.parseDouble(cur.getBuyDelda()) > Double.parseDouble(cur.getSaleDelta())) {
+        if (Double.parseDouble(cur.getBuyDelda()) > 0) {
             buyDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaUp));
-            saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
+        } else if (Double.parseDouble(cur.getBuyDelda()) == 0) {
+            buyDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
         } else {
             buyDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
-            saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaUp));
         }
+        if (Double.parseDouble(cur.getSaleDelta()) > 0) {
+            saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaUp));
+        } else if (Double.parseDouble(cur.getSaleDelta()) == 0) {
+            saleDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
+        } else {
+            saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
+        }
+
         if (Double.parseDouble(cur.getBuyDelda()) == Double.parseDouble(cur.getSaleDelta())) {
             buyDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
             saleDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
