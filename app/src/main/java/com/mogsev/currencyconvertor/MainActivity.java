@@ -4,10 +4,12 @@ package com.mogsev.currencyconvertor;
  * Created by zhenya on 01.08.2015.
  */
 
+import android.app.AlertDialog;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -72,10 +74,22 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_help) {
+            onActionMenuAbout();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Create dialog about app
+     */
+    private void onActionMenuAbout() {
+        AlertDialog.Builder actionAbout = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        actionAbout.setView(layoutInflater.inflate(R.layout.dialog_about, null))
+                .setTitle(R.string.app_name)
+                .create()
+                .show();
     }
 }

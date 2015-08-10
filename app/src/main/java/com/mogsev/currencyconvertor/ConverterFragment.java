@@ -37,12 +37,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class ConverterFragment extends Fragment {
     private View view;
-
     private final static String TAG = "ConverterFragment";
     private final static String CRR = "ConversionRateResult";
     private final static String CRE = "ConversionRateException";
     private final static String GET_URL = "GetURL";
-
     private final static String URL_WEB_SERVICE = "http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?";
 
     // Initialize View elements
@@ -279,7 +277,7 @@ public class ConverterFragment extends Fragment {
      * @return
      */
     private String checkConversionResult(String str) {
-        return (str.equals("-1") || str.equals("")) ? getString(R.string.no_data) : str;
+        return (str.equals("-1") || str.equals("") || str == null) ? getString(R.string.no_data) : str;
     }
 
     /**
@@ -295,10 +293,10 @@ public class ConverterFragment extends Fragment {
         protected void onPostExecute(String str) {
             try {
                 numValueFrom = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+                textViewFromRate.setText(String.valueOf(checkConversionResult(str)));
             } catch (Exception ex) {
-
+                Log.d(TAG, ex.getMessage());
             }
-            textViewFromRate.setText(String.valueOf(checkConversionResult(str)));
         }
     }
 
@@ -315,11 +313,11 @@ public class ConverterFragment extends Fragment {
         protected void onPostExecute(String str) {
             try {
                 numValueTo = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
+                textViewToRate.setText(String.valueOf(checkConversionResult(str)));
+                calculateValue(new BigDecimal(1));
             } catch (Exception ex) {
-
+                Log.d(TAG, ex.getMessage());
             }
-            textViewToRate.setText(String.valueOf(checkConversionResult(str)));
-            calculateValue(new BigDecimal(1));
         }
     }
 

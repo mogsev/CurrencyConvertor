@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">CurrencyConverter</string>
+    <string name="app_name">Конвертор валют</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_help">О конверторе</string>
     <string name="no_data">Нет данных</string>
     <string name="btn_refresh">ОБНОВИТЬ</string>
     <string name="currency">Валюта</string>
@@ -11,6 +10,12 @@
 
     <string name="short_phone">Тел.</string>
     <string name="short_city">г.</string>
+
+    <string name="empty">Cannot find data or no access to Internet</string>
+    <string name="link_cash">http://cashexchange.com.ua/</string>
+    <string name="link_finance">http://finance.ua/</string>
+    <string name="link_github">https://github.com/mogsev/CurrencyConvertor</string>
+
 
     <!-- Spinners -->
     <string-array name="currency">
@@ -134,9 +139,4 @@
         <item>JPY</item>
     </string-array>
 
-
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="empty">Cannot find data</string>
 </resources>

@@ -1,10 +1,6 @@
 package com.mogsev.util;
 
-import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -13,24 +9,22 @@ import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
+ * Test
  * Created by zhenya on 04.08.2015.
  */
 public class InformerAdapter {
     private static final String URL_FINANCE = "http://resources.finance.ua/ru/public/currency-cash.xml";
 
-    private HashMap<String, String> hmCities;
-    private HashMap<String, String> hmRegions;
-
+    private HashMap<String, String> hmCities = new HashMap<>();
+    private HashMap<String, String> hmRegions = new HashMap<>();
 
     protected Document documentFinance;
-
     protected boolean isDocument;
 
     public InformerAdapter() {
@@ -71,10 +65,4 @@ public class InformerAdapter {
             Log.d("UpdateCities", i + " " + id.getValue() + " " + title.getValue());
         }
     }
-
-    public void refreshAdapter() {
-        updateCities();
-    }
-
-
 }
