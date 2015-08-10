@@ -48,37 +48,32 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
         View view = convertView;
         if (view == null) {
             view = layoutInflater.inflate(R.layout.item_finance, parent, false);
+            finance = this.getItem(position);
+            ((TextView) view.findViewById(R.id.tvBankTitle)).setText(finance.getTitle());
+            tvCity = (TextView) view.findViewById(R.id.tvBankCity);
+            tvCity.setText(R.string.short_city);
+            tvCity.append(" ");
+            tvCity.append(finance.getCity());
+            tvCity.append("\t");
+            tvCity.append(finance.getRegion());
+            tvAddress = (TextView) view.findViewById(R.id.tvBankAddress);
+            tvAddress.setText(finance.getAddress());
+            tvAddress.append("\t");
+            tvAddress.append("Tel.");
+            tvAddress.append(" ");
+            tvAddress.append(finance.getPhone());
+
+            LinearLayout llCurrency = (LinearLayout) view.findViewById(R.id.llFinance);
+            List list = finance.getCurrencies();
+            for (int i = 0; i < list.size(); i ++) {
+                View viewCur = layoutInflater.inflate(R.layout.item_finance_currency, parent, false);
+                CurrencyInformer cur = (CurrencyInformer) list.get(i);
+                ((TextView) viewCur.findViewById(R.id.tvCurrencyName)).setText(cur.getCode());
+                ((TextView) viewCur.findViewById(R.id.tvCurrencyBuy)).setText(cur.getBuy());
+                ((TextView) viewCur.findViewById(R.id.tvCurrencySale)).setText(cur.getSale());
+                llCurrency.addView(viewCur);
+            }
         }
-        finance = this.getItem(position);
-        ((TextView) view.findViewById(R.id.tvBankTitle)).setText(finance.getTitle());
-        tvCity = (TextView) view.findViewById(R.id.tvBankCity);
-        tvCity.setText(R.string.short_city);
-        tvCity.append(" ");
-        tvCity.append(finance.getCity());
-        tvCity.append("\t");
-        tvCity.append(finance.getRegion());
-        tvAddress = (TextView) view.findViewById(R.id.tvBankAddress);
-        tvAddress.setText(finance.getAddress());
-        tvAddress.append("\t");
-        tvAddress.append("Tel.");
-        tvAddress.append(" ");
-        tvAddress.append(finance.getPhone());
-
-        //**************************************************************************
-        LinearLayout llCurrency = (LinearLayout) view.findViewById(R.id.llFinance);
-        List list = finance.getCurrencies();
-
-        for (int i = 0; i < list.size(); i ++) {
-            View viewCur = layoutInflater.inflate(R.layout.item_finance_currency, parent, false);
-            CurrencyInformer cur = (CurrencyInformer) list.get(i);
-            ((TextView) viewCur.findViewById(R.id.tvCurrencyName)).setText(cur.getCode());
-            ((TextView) viewCur.findViewById(R.id.tvCurrencyBuy)).setText(cur.getBuy());
-            ((TextView) viewCur.findViewById(R.id.tvCurrencySale)).setText(cur.getSale());
-            llCurrency.addView(viewCur);
-        }
-
-        //llCurrency.addView(viewCur);
-        //*************************************************************************
         return view;
     }
 
@@ -96,6 +91,10 @@ public class FinanceAdapter extends ArrayAdapter<Finance>{
         Log.d(TAG, "setData end");
     }
 
+    /**
+     * Find city and change data in adapter
+     * @param city
+     */
     public void notifyCity(String city) {
         Log.d(TAG, "notifyCity start");
         this.clear();

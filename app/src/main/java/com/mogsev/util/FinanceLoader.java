@@ -63,6 +63,9 @@ public class FinanceLoader extends AsyncTaskLoader<List<Finance>> {
         }
     }
 
+    /**
+     * Initializing data
+     */
     private void initData() {
         Log.d(TAG, "initData start");
         listFinance = new ArrayList<>();
@@ -114,7 +117,8 @@ public class FinanceLoader extends AsyncTaskLoader<List<Finance>> {
                     Node code = currency.getAttributes().getNamedItem("id");
                     Node buy = currency.getAttributes().getNamedItem("br");
                     Node sale = currency.getAttributes().getNamedItem("ar");
-                    listFinance.get(i).addCurrency(new CurrencyInformer.Builder(code.getTextContent())
+                    listFinance.get(i).addCurrency(
+                            new CurrencyInformer.Builder(code.getTextContent())
                             .buy(buy.getTextContent())
                             .sale(sale.getTextContent())
                             .build());
@@ -124,9 +128,6 @@ public class FinanceLoader extends AsyncTaskLoader<List<Finance>> {
         } catch (Exception ex) {
             Log.d(TAG, "initData " + ex.toString());
         }
-
-        listFinance.add(new Finance.Builder().title("AVAL").city("Житомир").build());
-        listFinance.add(new Finance.Builder().title("PRIVAT").city("Киев").build());
         Log.d(TAG, "initData stop" + listFinance.toString());
     }
 }
