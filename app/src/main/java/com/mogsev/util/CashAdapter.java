@@ -72,10 +72,10 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
             saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
         }
 
-        if (Double.parseDouble(cur.getBuyDelda()) == Double.parseDouble(cur.getSaleDelta())) {
+        /**if (Double.parseDouble(cur.getBuyDelda()) == Double.parseDouble(cur.getSaleDelta())) {
             buyDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
             saleDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
-        }
+        }*/
         ((TextView) view.findViewById(R.id.tvInformerCode)).setText(cur.getCode());
         ((TextView) view.findViewById(R.id.tvInformerName)).setText(cur.getName());
         ((TextView) view.findViewById(R.id.tvInformerBuy)).setText(cur.getBuy());

@@ -19,6 +19,9 @@ import com.mogsev.util.Finance;
 import com.mogsev.util.FinanceAdapter;
 import com.mogsev.util.FinanceLoader;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -85,6 +88,20 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         Log.d(TAG, "onLoadFinished start");
         // Set the new data in the adapter.
         financeAdapter.setData(data);
+        //*******************************
+        /**
+        spinnerAdapter.clear();
+
+        HashSet<String> set = new HashSet<>();
+        for (Finance fin : data) {
+            set.add(fin.getCity());
+        }
+        Iterator<String> iterator = set.iterator();
+        while(iterator.hasNext()) {
+            spinnerAdapter.add(iterator.next());
+        }
+        spinnerAdapter.notifyDataSetChanged();
+         */
     }
 
 
