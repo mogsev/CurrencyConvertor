@@ -36,6 +36,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     private String[] cityData;
     private ArrayAdapter<String> spinnerAdapter;
     private Spinner spinner;
+    private ArrayList<Finance> list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         spinner = (Spinner) view.findViewById(R.id.spinnerCity);
         spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,6 +91,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         // Set the new data in the adapter.
         financeAdapter.setData(data);
         //*******************************
+        setSpinnerAdapter(data);
         /**
         spinnerAdapter.clear();
 
@@ -109,5 +112,25 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     public void onLoaderReset(Loader<List<Finance>> loader) {
         Log.d(TAG, "onLoaderReset start");
         financeAdapter.setData(null);
+    }
+
+    private void setSpinnerAdapter(List<Finance> list) {
+        //spinnerAdapter.setNotifyOnChange(true);
+        //spinnerAdapter.clear();
+
+        HashSet<String> set = new HashSet<>();
+        for (Finance fin : list) {
+            set.add(fin.getCity());
+        }
+        cityData = new String[set.size()];
+        Iterator<String> iterator = set.iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            cityData[i] = iterator.next();
+            i++;
+        }
+        //spinnerAdapter.notifyDataSetChanged();
+        spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
+        spinner.setAdapter(spinnerAdapter);
     }
 }

@@ -88,10 +88,10 @@ public class FinanceAdapter extends ArrayAdapter<Finance> {
         if (data != null) {
             financesList = data;
             this.addAll(data);
+            Log.d(TAG, " " + data.size());
+            Log.d(TAG, " " + data.toString());
+            Log.d(TAG, "setData end");
         }
-        Log.d(TAG, " " + data.size());
-        Log.d(TAG, " " + data.toString());
-        Log.d(TAG, "setData end");
     }
 
     /**
