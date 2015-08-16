@@ -16,7 +16,6 @@
     <string name="link_finance">http://finance.ua/</string>
     <string name="link_github">https://github.com/mogsev/CurrencyConvertor</string>
 
-
     <!-- Spinners -->
     <string-array name="currency">
         <item>DZD</item>
@@ -85,39 +84,25 @@
     </string-array>
 
     <string-array name="city">
-        <item>Антрацит</item>
-        <item>Белгород-Днестровский</item>
         <item>Винница</item>
         <item>Днепропетровск</item>
         <item>Донецк</item>
         <item>Запорожье</item>
-        <item>Ивано-Франковск</item>
-        <item>Калита</item>
-        <item>Каменец-Подольский</item>
         <item>Киев</item>
         <item>Кировоград</item>
-        <item>Ковель</item>
-        <item>Красноармейск</item>
-        <item>Кременчуг</item>
-        <item>Кривой Рог</item>
-        <item>Луганск</item>
         <item>Львов</item>
         <item>Николаев</item>
         <item>Одесса</item>
-        <item>Павлоград</item>
         <item>Полтава</item>
         <item>Ровно</item>
-        <item>Северодонецк</item>
         <item>Сумы</item>
         <item>Тернополь</item>
         <item>Ужгород</item>
         <item>Харьков</item>
         <item>Херсон</item>
         <item>Хмельницкий</item>
-        <item>Червоноград</item>
         <item>Черкассы</item>
         <item>Чернигов</item>
-        <item>Черновцы</item>
     </string-array>
 
     <string-array name="cash">
