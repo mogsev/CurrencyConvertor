@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.mogsev.util.CurrencyInformer;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -30,7 +28,6 @@ public class CashLoader extends AsyncTaskLoader<List<CurrencyInformer>> {
     private static final String TAG_ELEMENT = "Element";
     private HashMap<String, String> hashName = new HashMap<>();
     private HashMap<String, String> hashNameEnglish = new HashMap<>();
-    protected Document documentCash;
     private List<CurrencyInformer> listCash;
 
     /**
@@ -82,9 +79,14 @@ public class CashLoader extends AsyncTaskLoader<List<CurrencyInformer>> {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(connection.getInputStream());
             NodeList listElement = document.getElementsByTagName(TAG_ELEMENT);
-            Node node, code, buy, sale, buyDelta, saleDelta = null;
+            Node node = null;
+            Node code = null;
+            Node buy = null;
+            Node sale = null;
+            Node buyDelta = null;
+            Node saleDelta = null;
             NodeList nodeList = null;
-            for (int i = 0; i < listElement.getLength() - 1; i++) {
+            for (int i = 0; i < listElement.getLength(); i++) {
                 node = listElement.item(i);
                 nodeList = node.getChildNodes();
                 code = nodeList.item(0);
@@ -119,7 +121,11 @@ public class CashLoader extends AsyncTaskLoader<List<CurrencyInformer>> {
             Document doc = db.parse(connection.getInputStream());
 
             NodeList nodeList = doc.getElementsByTagName(TAG_CURRENCY);
-            Node node, charCode, name, nameEnglish = null;
+
+            Node node = null;
+            Node charCode = null;
+            Node name = null;
+            Node nameEnglish = null;
             for (int i = 0; i < nodeList.getLength(); i++) {
                 node = nodeList.item(i);
                 NodeList childNodes = node.getChildNodes();
@@ -134,5 +140,4 @@ public class CashLoader extends AsyncTaskLoader<List<CurrencyInformer>> {
         }
         Log.d(TAG, "initHash stop");
     }
-
 }

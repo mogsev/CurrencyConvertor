@@ -49,7 +49,7 @@ public class CashFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_informer, container, false);
+        view = inflater.inflate(R.layout.fragment_cash, container, false);
         return view;
     }
 

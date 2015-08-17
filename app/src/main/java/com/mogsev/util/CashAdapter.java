@@ -23,27 +23,25 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
     private TextView saleDelta;
     private CurrencyInformer cur;
 
-
     public CashAdapter(Context context) {
         super(context, R.layout.item_cash_informer);
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public CashAdapter(Context context, List list) {
-        super(context, R.layout.item_cash_informer);
-        this.context = context;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
+    /**
+     * Set data
+     *
+     * @param data
+     */
     public void setData(List<CurrencyInformer> data) {
         Log.d(TAG, "setData start");
         this.clear();
         if (data != null) {
             this.addAll(data);
+            Log.d(TAG, "setData " + data.toString());
         }
-        this.notifyDataSetChanged();
-        Log.d(TAG, "setData " + data.toString());
+        Log.d(TAG, "setData end");
     }
 
     @Override
@@ -57,6 +55,7 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
         saleDelta = (TextView) view.findViewById(R.id.tvInformerSaleDelta);
         buyDelta.setText(cur.getBuyDelda());
         saleDelta.setText(cur.getSaleDelta());
+        // Set color buy delta
         if (Double.parseDouble(cur.getBuyDelda()) > 0) {
             buyDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaUp));
         } else if (Double.parseDouble(cur.getBuyDelda()) == 0) {
@@ -64,6 +63,7 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
         } else {
             buyDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
         }
+        // Set color sale delta
         if (Double.parseDouble(cur.getSaleDelta()) > 0) {
             saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaUp));
         } else if (Double.parseDouble(cur.getSaleDelta()) == 0) {
@@ -71,11 +71,6 @@ public class CashAdapter extends ArrayAdapter<CurrencyInformer> {
         } else {
             saleDelta.setTextColor(context.getResources().getColor(R.color.ColorDeltaDown));
         }
-
-        /**if (Double.parseDouble(cur.getBuyDelda()) == Double.parseDouble(cur.getSaleDelta())) {
-            buyDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
-            saleDelta.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
-        }*/
         ((TextView) view.findViewById(R.id.tvInformerCode)).setText(cur.getCode());
         ((TextView) view.findViewById(R.id.tvInformerName)).setText(cur.getName());
         ((TextView) view.findViewById(R.id.tvInformerBuy)).setText(cur.getBuy());
