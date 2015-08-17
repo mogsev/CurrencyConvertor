@@ -1,18 +1,11 @@
 package com.mogsev.currencyconvertor;
 
-import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,20 +16,19 @@ import com.mogsev.util.CurrencyURL;
 import com.mogsev.util.CurrencyModel;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+/**
+ * Test class
+ * Created by zhenya on 01.08.2015.
+ */
 public class Converter extends AppCompatActivity {
-    // Commit Log
     private final static String CRR = "ConversionRateResult";
     private final static String CRE = "ConversionRateException";
     private final static String GET_URL = "GetURL";
@@ -65,7 +57,6 @@ public class Converter extends AppCompatActivity {
      * Initialize View elements
      */
     private void initView() {
-        //value = (TextView) this.findViewById(R.id.value);
         spinnerFromCurrency = (Spinner) this.findViewById(R.id.from_currency);
         spinnerToCurrency = (Spinner) this.findViewById(R.id.to_currency);
 
@@ -126,6 +117,7 @@ public class Converter extends AppCompatActivity {
         //***********************************************************
     }
 
+    /**
     public void getRateCash(View view) {
         Log.d("getRate", "Begin getRate");
         Thread thread = new Thread(new Runnable() {
@@ -166,7 +158,7 @@ public class Converter extends AppCompatActivity {
         });
         thread.start();
         Log.d("getRate", "End getRate");
-    }
+    } */
 
     /**
      * Example url - "http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?FromCurrency=USD&ToCurrency=UAH"
@@ -203,7 +195,6 @@ public class Converter extends AppCompatActivity {
                 url.append(CurrencyURL.TO).append(from);
                 break;
         }
-
         Log.d(GET_URL, url.toString());
         return url.toString();
     }
