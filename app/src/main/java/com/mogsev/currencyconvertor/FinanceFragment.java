@@ -50,9 +50,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         // Initialize spinner start
         cityData = getResources().getStringArray(R.array.city);
         spinner = (Spinner) view.findViewById(R.id.spinnerCity);
-        spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        setSpinnerAdapter();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -124,7 +122,15 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
             cityData[i] = iterator.next();
             i++;
         }
+        setSpinnerAdapter();
+    }
+
+    /**
+     * Set spinner adapter
+     */
+    private void setSpinnerAdapter() {
         spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
+        spinnerAdapter.setDropDownViewResource(R.layout.finance_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
     }
 }
