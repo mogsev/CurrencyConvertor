@@ -77,6 +77,9 @@ public class ConverterFragment extends Fragment {
     private LinearLayout converterProgressFrom;
     private LinearLayout converterProgressTo;
 
+    ConversionRate conversionRate;
+    ConversionRateInverse conversionRateInverse;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +87,10 @@ public class ConverterFragment extends Fragment {
 
         // Initialize View elements
         initViewElements();
+
+        // Initialize AsyncTask
+        conversionRate = new ConversionRate();
+        conversionRateInverse = new ConversionRateInverse();
 
         // Initialize CurrencyAdapter
         currency = Currency.getInstance();
@@ -250,9 +257,9 @@ public class ConverterFragment extends Fragment {
      *
      */
     private void getRate() {
-        ConversionRate conversionRate = new ConversionRate(); // Create
+        conversionRate = new ConversionRate();
         conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
-        ConversionRateInverse conversionRateInverse = new ConversionRateInverse(); // Create
+        conversionRateInverse = new ConversionRateInverse();
         conversionRateInverse.execute(getUrl(CurrencyURL.URL_INVERSE)); // Start
     }
 
@@ -339,6 +346,8 @@ public class ConverterFragment extends Fragment {
             super.onPreExecute();
             converterProgressTo.setVisibility(View.VISIBLE);
         }
+
+
     }
 
     /**
