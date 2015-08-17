@@ -5,6 +5,8 @@
     android:orientation="vertical"
     tools:context="com.mogsev.currencyconvertor.InformerFragment">
 
+    <include layout="@layout/progress_bar"/>
+
     <ListView
         android:id="@id/android:list"
         android:layout_width="match_parent"
