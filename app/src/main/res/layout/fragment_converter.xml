@@ -25,6 +25,7 @@
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:background="?android:attr/dividerHorizontal" />
 
         <Spinner
@@ -178,16 +179,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="4dp"
-            android:paddingRight="4dp">
+            android:paddingRight="4dp"
+            android:paddingBottom="@dimen/padding_eight">
 
             <TextView
                 android:id="@+id/tvCalculateTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/padding_eight"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="10 UAH = 1.00 USD"
                 android:textSize="14sp" />
 
             <TextView
@@ -197,11 +198,32 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="10 USD = 100.00 UAH"
                 android:textSize="14sp" />
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/converterProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:text="@string/load"/>
+
+    </LinearLayout>
 
     <include
         layout="@layout/btn_refresh_bottom"

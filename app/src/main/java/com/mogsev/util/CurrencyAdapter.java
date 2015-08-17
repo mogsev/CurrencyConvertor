@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * Created by zhenya on 30.07.2015.
  */
 public class CurrencyAdapter extends ArrayAdapter<String> {
+    private static final String TAG = "CurrencyAdapter";
+    private static final String SUB = " - ";
     private ArrayList list;
     private CurrencyModel currencyModel;
     private LayoutInflater layoutInflater;
@@ -29,7 +31,7 @@ public class CurrencyAdapter extends ArrayAdapter<String> {
         currencyModel = (CurrencyModel) list.get(position);
         TextView textView = (TextView) row.findViewById(android.R.id.text1);
         textView.setText(currencyModel.getCode());
-        textView.append(" - ");
+        textView.append(SUB);
         textView.append(String.valueOf(currencyModel.getName()));
         return row;
     }

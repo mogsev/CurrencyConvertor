@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fragment_horizontal_margin">8dp</dimen>
     <dimen name="fragment_vertical_margin">8dp</dimen>
+    <dimen name="dialog_margin">8dp</dimen>
+    <dimen name="padding_two">2dp</dimen>
+    <dimen name="padding_four">4dp</dimen>
+    <dimen name="padding_eight">8dp</dimen>
 </resources>

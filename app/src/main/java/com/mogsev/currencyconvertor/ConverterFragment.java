@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,14 +37,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Created by zhenya on 01.08.2015.
  */
 public class ConverterFragment extends Fragment {
-    private View view;
     private final static String TAG = "ConverterFragment";
     private final static String CRR = "ConversionRateResult";
     private final static String CRE = "ConversionRateException";
     private final static String GET_URL = "GetURL";
     private final static String URL_WEB_SERVICE = "http://www.webservicex.net/CurrencyConvertor.asmx/ConversionRate?";
+    private final static String EMPTY = " ";
+    private final static String EQUALLY = " = ";
 
     // Initialize View elements
+    private View view;
     private Spinner spinnerFromCurrency;
     private Spinner spinnerToCurrency;
     private TextView textViewFromCurrency;
@@ -52,11 +55,10 @@ public class ConverterFragment extends Fragment {
     private TextView textViewToCurrency;
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
-    private TextView value;
-    private Button btnRefresh;
+    //private TextView value;
+    //private Button btnRefresh;
     private Button btnRefreshList;
     private ProgressDialog progressDialog;
-
 
     private EditText eValue;
     private TextView tvCalculateTo;
@@ -67,12 +69,13 @@ public class ConverterFragment extends Fragment {
     private BigDecimal numValueFrom;
     private BigDecimal numValueTo;
 
-
     private Currency currency;
     private String[] listCode;
     private ArrayList<CurrencyModel> list;
     private CurrencyAdapter currencyAdapter;
 
+    private LinearLayout converterProgressFrom;
+    private LinearLayout converterProgressTo;
 
     @Nullable
     @Override
@@ -159,8 +162,8 @@ public class ConverterFragment extends Fragment {
                 getRate(view);
             }
         });
-        btnRefreshList.setFocusableInTouchMode(true);
-        btnRefreshList.requestFocus();
+        //btnRefreshList.setFocusableInTouchMode(true);
+        //btnRefreshList.requestFocus();
 
         tvCalculateTo = (TextView) view.findViewById(R.id.tvCalculateTo);
         tvCalculateFrom = (TextView) view.findViewById(R.id.tvCalculateFrom);
@@ -178,6 +181,9 @@ public class ConverterFragment extends Fragment {
                 }
             }
         });
+
+        converterProgressFrom = (LinearLayout) view.findViewById(R.id.converterProgress);
+        converterProgressTo = (LinearLayout) view.findViewById(R.id.converterProgress);
     }
 
     private void showCalc() {
@@ -210,7 +216,6 @@ public class ConverterFragment extends Fragment {
         // get string result spinners
         strFrom = currencyAdapter.getCode(numFromCurrency);
         strTo = currencyAdapter.getCode(numToCurrency);
-        //String to = currencyAdapter.getItem(numToCurrency).toString();
 
         textViewFromCurrency.setText(strFrom);
         textViewToCurrency.setText(strTo);
@@ -228,21 +233,22 @@ public class ConverterFragment extends Fragment {
                 url.append(CurrencyURL.TO).append(strFrom);
                 break;
         }
-
         Log.d(GET_URL, url.toString());
         return url.toString();
     }
 
     /**
+     * Update information
+     *
      * @param view
      */
     public void getRate(View view) {
-        ConversionRate conversionRate = new ConversionRate(); // Create
-        conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
-        ConversionRateInverse conversionRateInverse = new ConversionRateInverse(); // Create
-        conversionRateInverse.execute(getUrl(CurrencyURL.URL_INVERSE)); // Start
+        getRate();
     }
 
+    /**
+     *
+     */
     private void getRate() {
         ConversionRate conversionRate = new ConversionRate(); // Create
         conversionRate.execute(getUrl(CurrencyURL.URL_NORMAL)); // Start
@@ -294,16 +300,23 @@ public class ConverterFragment extends Fragment {
             try {
                 numValueFrom = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
                 textViewFromRate.setText(String.valueOf(checkConversionResult(str)));
+                converterProgressFrom.setVisibility(View.GONE);
             } catch (Exception ex) {
                 Log.d(TAG, ex.getMessage());
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            converterProgressFrom.setVisibility(View.VISIBLE);
         }
     }
 
     /**
      * Conversion rate inverse
      */
-    private class ConversionRateInverse extends ConversionRate {
+    private class ConversionRateInverse extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             return connection(params[0]);
@@ -315,19 +328,28 @@ public class ConverterFragment extends Fragment {
                 numValueTo = BigDecimal.valueOf(Double.parseDouble(checkConversionResult(str)));
                 textViewToRate.setText(String.valueOf(checkConversionResult(str)));
                 calculateValue(new BigDecimal(1));
+                converterProgressTo.setVisibility(View.GONE);
             } catch (Exception ex) {
                 Log.d(TAG, ex.getMessage());
             }
         }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            converterProgressTo.setVisibility(View.VISIBLE);
+        }
     }
 
-    public void refreshList(View view) {
-        for (int i = 0; i < currencyAdapter.getCount(); i++) {
-            CurrencyModel currencyModel = (CurrencyModel) currencyAdapter.getList().get(i);
-            currencyModel.setName(currency.getName(currencyModel.getCode()));
-        }
-        currencyAdapter.setNotifyOnChange(true);
-    }
+    /**
+     public void refreshList(View view) {
+     for (int i = 0; i < currencyAdapter.getCount(); i++) {
+     CurrencyModel currencyModel = (CurrencyModel) currencyAdapter.getList().get(i);
+     currencyModel.setName(currency.getName(currencyModel.getCode()));
+     }
+     currencyAdapter.setNotifyOnChange(true);
+     }
+     */
 
     /**
      * Refresh list of currency
@@ -356,9 +378,14 @@ public class ConverterFragment extends Fragment {
         BigDecimal resultFrom = calc.multiply(numValueFrom);
         BigDecimal resultTo = calc.multiply(numValueTo);
 
-
-        tvCalculateFrom.setText(calc + " " + strFrom + " = ");
-        tvCalculateFrom.append(resultFrom + " " + strTo);
+        // Example 1 USD = 10 UAH
+        tvCalculateFrom.setText(String.valueOf(calc));
+        tvCalculateFrom.append(EMPTY);
+        tvCalculateFrom.append(strFrom);
+        tvCalculateFrom.append(EQUALLY);
+        tvCalculateFrom.append(String.valueOf(resultFrom));
+        tvCalculateFrom.append(EMPTY);
+        tvCalculateFrom.append(strTo);
 
         tvCalculateTo.setText(calc + " " + strTo + " = ");
         tvCalculateTo.append(resultTo + " " + strFrom);
