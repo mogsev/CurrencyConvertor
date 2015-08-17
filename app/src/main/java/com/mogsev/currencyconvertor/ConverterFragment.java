@@ -170,7 +170,7 @@ public class ConverterFragment extends Fragment {
             }
         });
         //btnRefreshList.setFocusableInTouchMode(true);
-        //btnRefreshList.requestFocus();
+        btnRefreshList.requestFocus();
 
         tvCalculateTo = (TextView) view.findViewById(R.id.tvCalculateTo);
         tvCalculateFrom = (TextView) view.findViewById(R.id.tvCalculateFrom);
