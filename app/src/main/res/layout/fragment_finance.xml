@@ -5,27 +5,14 @@
     android:orientation="vertical"
     tools:context="com.mogsev.currencyconvertor.FinanceFragment">
 
+    <include layout="@layout/progress_bar"/>
+
     <Spinner
         android:id="@+id/spinnerCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:spinnerMode="dialog" />
-
-    <LinearLayout
-        android:id="@+id/linlaHeaderProgress"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <ProgressBar
-            android:id="@+id/pbHeaderProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </ProgressBar>
-    </LinearLayout>
 
     <ListView
         android:id="@id/android:list"

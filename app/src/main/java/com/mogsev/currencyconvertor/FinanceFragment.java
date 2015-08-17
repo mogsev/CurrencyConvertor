@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.mogsev.util.Finance;
@@ -34,9 +33,7 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     private String[] cityData;
     private ArrayAdapter<String> spinnerAdapter;
     private Spinner spinner;
-
-    ListView listView;
-    LinearLayout linearLayout;
+    private LinearLayout linearProgress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,16 +44,14 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //Initialize progress loader
-        listView = (ListView) view.findViewById(android.R.id.list);
-        linearLayout = (LinearLayout) view.findViewById(R.id.linlaHeaderProgress);
+        //Initialize progress bar loader
+        linearProgress = (LinearLayout) view.findViewById(R.id.loaderProgress);
 
         // Initialize spinner start
         cityData = getResources().getStringArray(R.array.city);
         spinner = (Spinner) view.findViewById(R.id.spinnerCity);
         spinnerAdapter = new ArrayAdapter(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, cityData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -71,12 +66,12 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         });
         // Initialize spinner end
 
+        // Initialize Adapter
         financeAdapter = new FinanceAdapter(getActivity());
         setListAdapter(financeAdapter);
+
         // Initialize LoadManager
         getLoaderManager().initLoader(LOADER_FINANCE, null, this);
-
-
     }
 
     @Override
@@ -88,7 +83,8 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
     @Override
     public Loader<List<Finance>> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader start");
-        linearLayout.setVisibility(View.VISIBLE);
+        // Show progress bar
+        linearProgress.setVisibility(View.VISIBLE);
         return new FinanceLoader(getActivity());
     }
 
@@ -97,8 +93,12 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         Log.d(TAG, "onLoadFinished start");
         // Set the new data in the adapter.
         financeAdapter.setData(data);
+
+        // Set the new data in the Spinner Adapter
         setSpinnerAdapter(data);
-        linearLayout.setVisibility(View.GONE);
+
+        // Hide progressbar
+        linearProgress.setVisibility(View.GONE);
     }
 
 
@@ -108,6 +108,10 @@ public class FinanceFragment extends ListFragment implements LoaderManager.Loade
         financeAdapter.setData(null);
     }
 
+    /**
+     * Set the new data in the Spinner Adapter
+     * @param list
+     */
     private void setSpinnerAdapter(List<Finance> list) {
         HashSet<String> set = new HashSet<>();
         for (Finance fin : list) {
