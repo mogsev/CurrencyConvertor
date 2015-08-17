@@ -19,20 +19,25 @@ import java.util.List;
  */
 public class FinanceAdapter extends ArrayAdapter<Finance> {
     private static final String TAG = "FinanceAdapter";
+    private static final String EMPTY = " ";
+    private static final String TAB = "\t";
     Context context;
     private LayoutInflater layoutInflater;
     private TextView tvCity;
     private TextView tvAddress;
     private Finance finance;
     private List<Finance> financesList = new ArrayList<>();
+    private String shortCity;
+    private String shortRegion;
+    private String shortPhone;
 
     public FinanceAdapter(Context context) {
         super(context, R.layout.item_finance_currency);
         this.context = context;
-    }
-
-    public FinanceAdapter(Context context, int resource) {
-        super(context, resource);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        shortCity = context.getResources().getString(R.string.short_city);
+        shortRegion = context.getResources().getString(R.string.short_region);
+        shortPhone = context.getResources().getString(R.string.short_phone);
     }
 
     /**
@@ -45,23 +50,26 @@ public class FinanceAdapter extends ArrayAdapter<Finance> {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.item_finance, parent, false);
 
         finance = this.getItem(position);
         Log.d(TAG, finance.toString());
         ((TextView) view.findViewById(R.id.tvBankTitle)).setText(finance.getTitle());
+
         tvCity = (TextView) view.findViewById(R.id.tvBankCity);
-        tvCity.setText(R.string.short_city);
-        tvCity.append(" ");
+        tvCity.setText(shortCity);
+        tvCity.append(EMPTY);
         tvCity.append(finance.getCity());
-        tvCity.append("\t");
+        tvCity.append(TAB);
+        tvCity.append(shortRegion);
+        tvCity.append(EMPTY);
         tvCity.append(finance.getRegion());
+
         tvAddress = (TextView) view.findViewById(R.id.tvBankAddress);
         tvAddress.setText(finance.getAddress());
-        tvAddress.append("\t");
-        tvAddress.append("Tel.");
-        tvAddress.append(" ");
+        tvAddress.append(TAB);
+        tvAddress.append(shortPhone);
+        tvAddress.append(EMPTY);
         tvAddress.append(finance.getPhone());
 
         LinearLayout llCurrency = (LinearLayout) view.findViewById(R.id.llFinance);
@@ -88,10 +96,9 @@ public class FinanceAdapter extends ArrayAdapter<Finance> {
         if (data != null) {
             financesList = data;
             this.addAll(data);
-            Log.d(TAG, " " + data.size());
-            Log.d(TAG, " " + data.toString());
-            Log.d(TAG, "setData end");
+            Log.d(TAG, "setData " + data.toString());
         }
+        Log.d(TAG, "setData end");
     }
 
     /**

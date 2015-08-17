@@ -6,26 +6,25 @@
     android:orientation="vertical"
     android:padding="6dp">
 
+    <!-- Name of bank -->
     <TextView
         android:id="@+id/tvBankTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bank Name"
         android:textSize="14sp" />
 
+    <!-- City of Bank -->
     <TextView
         android:id="@+id/tvBankCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="City + Region"
         android:textSize="12sp" />
 
-
+    <!-- Address of bank -->
     <TextView
         android:id="@+id/tvBankAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address + Phone"
         android:textSize="12sp" />
 
     <LinearLayout
@@ -38,7 +37,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Currency name"
+            android:text="@string/currency_code"
             android:textSize="12sp" />
 
         <TextView
@@ -46,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Buy"
+            android:text="@string/buy"
             android:textSize="12sp" />
 
         <TextView
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Sale"
+            android:text="@string/sale"
             android:textSize="12sp" />
 
     </LinearLayout>

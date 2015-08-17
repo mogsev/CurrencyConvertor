@@ -10,12 +10,16 @@
 
     <string name="short_phone">Тел.</string>
     <string name="short_city">г.</string>
+    <string name="short_region">обл.</string>
 
     <string name="empty">Cannot find data or no access to Internet</string>
     <string name="link_cash">http://cashexchange.com.ua/</string>
     <string name="link_finance">http://finance.ua/</string>
     <string name="link_github">https://github.com/mogsev/CurrencyConvertor</string>
     <string name="load">Загрузка данных...</string>
+    <string name="currency_code">Код валюты</string>
+    <string name="buy">Покупка</string>
+    <string name="sale">Продажа</string>
 
     <!-- Spinners -->
     <string-array name="currency">
