@@ -55,8 +55,6 @@ public class ConverterFragment extends Fragment {
     private TextView textViewToCurrency;
     private TextView textViewToCurrencyName;
     private TextView textViewToRate;
-    //private TextView value;
-    //private Button btnRefresh;
     private Button btnRefreshList;
     private ProgressDialog progressDialog;
 
@@ -150,7 +148,6 @@ public class ConverterFragment extends Fragment {
     private void initViewElements() {
         //value = (TextView) view.findViewById(R.id.value);
         spinnerFromCurrency = (Spinner) view.findViewById(R.id.from_currency);
-
         spinnerToCurrency = (Spinner) view.findViewById(R.id.to_currency);
 
         textViewFromCurrency = (TextView) view.findViewById(R.id.textViewFromCurrency);
@@ -160,7 +157,6 @@ public class ConverterFragment extends Fragment {
         textViewToCurrency = (TextView) view.findViewById(R.id.textViewToCurrency);
         textViewToCurrencyName = (TextView) view.findViewById(R.id.textViewToCurrencyName);
         textViewToRate = (TextView) view.findViewById(R.id.textViewToRate);
-
 
         btnRefreshList = (Button) view.findViewById(R.id.btn_refresh_bottom);
         btnRefreshList.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +189,9 @@ public class ConverterFragment extends Fragment {
         converterProgressTo = (LinearLayout) view.findViewById(R.id.converterProgress);
     }
 
+    /**
+     * Show result
+     */
     private void showCalc() {
         if (!eValue.getText().toString().equals("") && eValue.getText() != null) {
             String str = eValue.getText().toString();
@@ -201,7 +200,7 @@ public class ConverterFragment extends Fragment {
             try {
                 calculateValue(calc);
             } catch (Exception ex) {
-                Toast.makeText(getActivity().getBaseContext(), "Update currency", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getBaseContext(), getString(R.string.toast_update), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -254,7 +253,7 @@ public class ConverterFragment extends Fragment {
     }
 
     /**
-     *
+     * Run AsyncTask
      */
     private void getRate() {
         conversionRate = new ConversionRate();
@@ -264,6 +263,7 @@ public class ConverterFragment extends Fragment {
     }
 
     /**
+     * Return result
      * @param str
      * @return
      */
@@ -346,26 +346,14 @@ public class ConverterFragment extends Fragment {
             super.onPreExecute();
             converterProgressTo.setVisibility(View.VISIBLE);
         }
-
-
     }
-
-    /**
-     public void refreshList(View view) {
-     for (int i = 0; i < currencyAdapter.getCount(); i++) {
-     CurrencyModel currencyModel = (CurrencyModel) currencyAdapter.getList().get(i);
-     currencyModel.setName(currency.getName(currencyModel.getCode()));
-     }
-     currencyAdapter.setNotifyOnChange(true);
-     }
-     */
 
     /**
      * Refresh list of currency
      */
     private void refreshListOfCurrency() {
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Refresh list of currency...");
+        progressDialog.setMessage(getString(R.string.message_update));
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         new Thread(new Runnable() {
@@ -383,7 +371,7 @@ public class ConverterFragment extends Fragment {
     }
 
     private void calculateValue(BigDecimal calc) {
-        Log.d("calculate", "Start");
+        Log.d(TAG, "Start calculate");
         BigDecimal resultFrom = calc.multiply(numValueFrom);
         BigDecimal resultTo = calc.multiply(numValueTo);
 
@@ -398,6 +386,6 @@ public class ConverterFragment extends Fragment {
 
         tvCalculateTo.setText(calc + " " + strTo + " = ");
         tvCalculateTo.append(resultTo + " " + strFrom);
-        Log.d("calculate", "end");
+        Log.d(TAG, "calculate end");
     }
 }
