@@ -5,20 +5,22 @@
     android:orientation="vertical"
     tools:context="com.mogsev.currencyconvertor.FinanceFragment">
 
-    <include layout="@layout/progress_bar"/>
+    <include layout="@layout/progress_bar" />
 
     <Spinner
         android:id="@+id/spinnerCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:padding="@dimen/padding_eight"
         android:spinnerMode="dialog" />
 
     <ListView
         android:id="@id/android:list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/padding_four"/>
+        android:paddingTop="@dimen/padding_eight"
+        android:paddingLeft="@dimen/padding_eight"
+        android:paddingRight="@dimen/padding_eight"/>
 
     <TextView
         android:id="@id/android:empty"

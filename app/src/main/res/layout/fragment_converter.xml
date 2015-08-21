@@ -22,11 +22,19 @@
             android:paddingRight="4dp"
             android:spinnerMode="dialog" />
 
+        <!--
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="?android:attr/dividerHorizontal" />
+            -->
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_swap_horizontal_grey600_24dp" />
 
         <Spinner
             android:id="@+id/to_currency"
@@ -158,7 +166,7 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter value"
+        android:hint="@string/hint"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:maxLength="8" />
