@@ -1,132 +1,32 @@
 <resources>
-    <string name="app_name">Конвертор валют</string>
+    <string name="app_name">Currency converter</string>
 
-    <string name="action_help">О конверторе</string>
-    <string name="no_data">Нет данных</string>
-    <string name="btn_refresh">ОБНОВИТЬ</string>
-    <string name="currency">Валюта</string>
-    <string name="currency_name">Название</string>
-    <string name="rate">Курс</string>
+    <string name="action_help">About</string>
+    <string name="no_data">No data</string>
+    <string name="btn_refresh">REFRESH</string>
+    <string name="currency">Currency</string>
+    <string name="currency_name">Name</string>
+    <string name="rate">Rate</string>
+    <string name="hint">Enter value</string>
 
-    <string name="short_phone">Тел.</string>
-    <string name="short_city">г.</string>
-    <string name="short_region">обл.</string>
+    <string name="short_phone">phone</string>
+    <string name="short_city">city</string>
+    <string name="short_region">region</string>
 
     <string name="empty">Cannot find data or no access to Internet</string>
     <string name="link_cash">http://cashexchange.com.ua/</string>
     <string name="link_finance">http://finance.ua/</string>
     <string name="link_github">https://github.com/mogsev/CurrencyConvertor</string>
-    <string name="load">Загрузка данных...</string>
-    <string name="currency_code">Код валюты</string>
-    <string name="buy">Покупка</string>
-    <string name="sale">Продажа</string>
+    <string name="load">Load data...</string>
+    <string name="currency_code">Code</string>
+    <string name="buy">Buy</string>
+    <string name="sale">Sale</string>
+    
+    <string name="titles_converter">converter</string>
+    <string name="titles_informer">informer</string>
+    <string name="titles_city">city</string>
 
-    <!-- Spinners -->
-    <string-array name="currency">
-        <item>DZD</item>
-        <item>ARS</item>
-        <item>AUD</item>
-        <item>BRL</item>
-        <item>GBP</item>
-        <item>CAD</item>
-        <item>CLP</item>
-        <item>CNY</item>
-        <item>COP</item>
-        <item>CYP</item>
-        <item>CZK</item>
-        <item>DKK</item>
-        <item>EGP</item>
-        <item>ETB</item>
-        <item>EUR</item>
-        <item>HUF</item>
-        <item>ISK</item>
-        <item>INR</item>
-        <item>IQD</item>
-        <item>ILS</item>
-        <item>JPY</item>
-        <item>JOD</item>
-        <item>KZT</item>
-        <item>KES</item>
-        <item>KRW</item>
-        <item>KWD</item>
-        <item>LAK</item>
-        <item>LVL</item>
-        <item>LBP</item>
-        <item>LYD</item>
-        <item>LTL</item>
-        <item>MXN</item>
-        <item>MDL</item>
-        <item>MNT</item>
-        <item>MAD</item>
-        <item>NPR</item>
-        <item>NZD</item>
-        <item>NGN</item>
-        <item>NOK</item>
-        <item>PKR</item>
-        <item>PEN</item>
-        <item>PHP</item>
-        <item>PLN</item>
-        <item>ROL</item>
-        <item>RUB</item>
-        <item>SAR</item>
-        <item>SGD</item>
-        <item>SKK</item>
-        <item>SIT</item>
-        <item>ZAR</item>
-        <item>LKR</item>
-        <item>SDD</item>
-        <item>SEK</item>
-        <item>CHF</item>
-        <item>SYP</item>
-        <item>THB</item>
-        <item>TND</item>
-        <item>USD</item>
-        <item>AED</item>
-        <item>UAH</item>
-        <item>UYU</item>
-        <item>VND</item>
-        <item>TRY</item>
-    </string-array>
-
-    <string-array name="city">
-        <item>Винница</item>
-        <item>Днепропетровск</item>
-        <item>Донецк</item>
-        <item>Запорожье</item>
-        <item>Киев</item>
-        <item>Кировоград</item>
-        <item>Львов</item>
-        <item>Николаев</item>
-        <item>Одесса</item>
-        <item>Полтава</item>
-        <item>Ровно</item>
-        <item>Сумы</item>
-        <item>Тернополь</item>
-        <item>Ужгород</item>
-        <item>Харьков</item>
-        <item>Херсон</item>
-        <item>Хмельницкий</item>
-        <item>Черкассы</item>
-        <item>Чернигов</item>
-    </string-array>
-
-    <string-array name="cash">
-        <item>USD</item>
-        <item>UER</item>
-        <item>RUB</item>
-        <item>GBP</item>
-        <item>AUD</item>
-        <item>BYR</item>
-        <item>HUF</item>
-        <item>DKK</item>
-        <item>CAD</item>
-        <item>CNY</item>
-        <item>NOK</item>
-        <item>PLN</item>
-        <item>CZK</item>
-        <item>SEK</item>
-        <item>CHF</item>
-        <item>JPY</item>
-    </string-array>
+    <string name="toast_update">Update currency</string>
+    <string name="message_update">Refresh list of currency...</string>
 
 </resources>

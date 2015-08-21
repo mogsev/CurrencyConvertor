@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Конвертер валют</string>
+
+    <string name="action_help">Про конвертер</string>
+    <string name="no_data">Дані відсутні</string>
+    <string name="btn_refresh">ОНОВИТИ</string>
+    <string name="currency">Валюта</string>
+    <string name="currency_name">Назва</string>
+    <string name="rate">Курс</string>
+    <string name="hint">Введіть суму</string>
+
+    <string name="short_phone">Тел.</string>
+    <string name="short_city">м.</string>
+    <string name="short_region">обл.</string>
+
+    <string name="empty">Відсутні дані або перевірте підключення до мережі Internet</string>
+    <string name="load">Завантаження даних...</string>
+    <string name="currency_code">Код валюти</string>
+    <string name="buy">Покупка</string>
+    <string name="sale">Продаж</string>
+
+    <string name="link_cash">http://cashexchange.com.ua/</string>
+    <string name="link_finance">http://finance.ua/</string>
+    <string name="link_github">https://github.com/mogsev/CurrencyConvertor</string>
+
+    <string name="titles_converter">конвертер</string>
+    <string name="titles_informer">інформер</string>
+    <string name="titles_city">міста</string>
+
+    <string name="toast_update">Обновіть валюту</string>
+    <string name="message_update">Оновлення списка валют...</string>
+
+</resources>
